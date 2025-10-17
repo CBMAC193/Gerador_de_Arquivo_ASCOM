@@ -487,9 +487,9 @@
                         { nome: 'nome_convidado_convite', label: 'Nome do Convidado', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4', individual: true },
                         {
                             nome: 'tropa_convite', label: 'Tropa', tipo: 'select', obrigatorio: true, tamanho: 'col-md-4', coletivo: true, opcoes: [
-                                { valor: 'Todos', texto: 'Todos' },
-                                { valor: 'Praças', texto: 'Praças' },
-                                { valor: 'Oficiais', texto: 'Oficiais' }
+                                { valor: 'Toda a Tropa', texto: 'Toda a Tropa' },
+                                { valor: 'Todos os Praças', texto: 'Todos os Praças' },
+                                { valor: 'Todos os Oficiais', texto: 'Todos os Oficiais' }
                             ]
                         },
                         { nome: 'pra_que_convidado_convite', label: 'Pra que foi convidado', tipo: 'text', obrigatorio: true, tamanho: 'col-md-12' },
@@ -524,7 +524,7 @@
 
             // Verificar se é um tipo que tem modo individual/coletivo
             const tiposComModoConvite = ['Convite'];
-            
+
             if (tiposComModoConvite.includes(tipo)) {
                 // Adicionar seleção de modo para convites
                 html += `
@@ -552,7 +552,7 @@
 
             campos.forEach(campo => {
                 const tamanho = campo.tamanho || 'col-md-6';
-                
+
                 // Verificar se o campo é específico para modo individual ou coletivo
                 let classeVisibilidade = '';
                 if (campo.individual) {
@@ -659,7 +659,6 @@
                 field.classList.remove('campo-faltando');
             });
         }
-
         // Função para adicionar indicador visual de campo obrigatório
         function addVisualIndicator(fieldId) {
             const field = document.getElementById(fieldId);
@@ -681,14 +680,43 @@
         }
 
         // Função para configurar indicadores visuais
+        // Função para configurar indicadores visuais
         function configurarIndicadoresVisuais() {
             const tipo = document.getElementById('tipo').value;
+
+            // PRIMEIRO: Remover todos os indicadores existentes para evitar conflitos
+            removerTodosIndicadoresVisuais();
 
             // Adicionar indicador para tipo de documento
             addVisualIndicator('tipo');
 
-            // Adicionar indicadores para campos específicos baseado no tipo
-            if (tipo === 'Diplomas') {
+            // VERIFICAR MODO DO CONVITE ESPECIFICAMENTE
+            if (tipo === 'Convite') {
+                const modoConvite = document.querySelector('input[name="modo_convite"]:checked')?.value || 'individual';
+                console.log(`[DEBUG Convite] Modo: ${modoConvite}`);
+
+                if (modoConvite === 'individual') {
+                    // APENAS CAMPOS INDIVIDUAIS SÃO OBRIGATÓRIOS
+                    addVisualIndicator('genero_convidado_convite');
+                    addVisualIndicator('cargo_convidado_convite');
+                    addVisualIndicator('nome_convidado_convite');
+                } else {
+                    // APENAS CAMPOS COLETIVOS SÃO OBRIGATÓRIOS
+                    addVisualIndicator('tropa_convite');
+                    addVisualIndicator('traje_convite');
+                }
+
+                // Campos comuns a ambos os modos
+                addVisualIndicator('pra_que_convidado_convite');
+                addVisualIndicator('data_convite');
+                addVisualIndicator('horario_convite');
+                addVisualIndicator('local_convite');
+                addVisualIndicator('cidade_convite');
+                addVisualIndicator('endereco_convite');
+                addVisualIndicator('posto_convite');
+                addVisualIndicator('comandante_convite');
+
+            } else if (tipo === 'Diplomas') {
                 addVisualIndicator('nome_diploma');
                 addVisualIndicator('decreto_diploma');
                 addVisualIndicator('local_diploma');
@@ -719,28 +747,6 @@
                 addVisualIndicator('local_agradecimento');
                 addVisualIndicator('data_agradecimento');
                 addVisualIndicator('comandante_agradecimento');
-            } else if (tipo === 'Convite') {
-                // Verificar qual modo está selecionado
-                const modoConvite = document.querySelector('input[name="modo_convite"]:checked')?.value || 'individual';
-                
-                if (modoConvite === 'individual') {
-                    addVisualIndicator('genero_convidado_convite');
-                    addVisualIndicator('cargo_convidado_convite');
-                    addVisualIndicator('nome_convidado_convite');
-                } else {
-                    addVisualIndicator('tropa_convite');
-                    addVisualIndicator('traje_convite');
-                }
-                
-                // Campos comuns
-                addVisualIndicator('pra_que_convidado_convite');
-                addVisualIndicator('data_convite');
-                addVisualIndicator('horario_convite');
-                addVisualIndicator('local_convite');
-                addVisualIndicator('cidade_convite');
-                addVisualIndicator('endereco_convite');
-                addVisualIndicator('posto_convite');
-                addVisualIndicator('comandante_convite');
             } else if (tipo === 'Nota de Pesar') {
                 addVisualIndicator('falecido_nota_pesar');
                 addVisualIndicator('parentesco_nota_pesar');
@@ -770,8 +776,6 @@
                 });
             });
         }
-
-
 
         // Configuração dos tipos e subtipos baseada no arquivo original
         const tipos = {
@@ -902,12 +906,14 @@
             if (radioIndividual && radioColetivo) {
                 function alternarModoConvite() {
                     const isColetivo = radioColetivo.checked;
-                    
+
+                    console.log(`[DEBUG] Alternando modo convite para: ${isColetivo ? 'coletivo' : 'individual'}`);
+
                     // Campos individuais
                     const camposIndividuais = document.querySelectorAll('.campo-individual');
                     // Campos coletivos
                     const camposColetivos = document.querySelectorAll('.campo-coletivo');
-                    
+
                     if (isColetivo) {
                         // Modo coletivo: ocultar campos individuais, mostrar coletivos
                         camposIndividuais.forEach(campo => {
@@ -915,7 +921,7 @@
                             const input = campo.querySelector('input, select');
                             if (input) input.required = false;
                         });
-                        
+
                         camposColetivos.forEach(campo => {
                             campo.classList.remove('d-none');
                             const input = campo.querySelector('input, select');
@@ -928,13 +934,18 @@
                             const input = campo.querySelector('input, select');
                             if (input) input.required = true;
                         });
-                        
+
                         camposColetivos.forEach(campo => {
                             campo.classList.add('d-none');
                             const input = campo.querySelector('input, select');
                             if (input) input.required = false;
                         });
                     }
+
+                    // ATUALIZAR INDICADORES VISUAIS APÓS ALTERAR O MODO
+                    setTimeout(() => {
+                        configurarIndicadoresVisuais();
+                    }, 100);
                 }
 
                 radioIndividual.addEventListener('change', alternarModoConvite);
@@ -952,12 +963,17 @@
                 return;
             }
 
-            // Validar campos obrigatórios usando o novo sistema
+            // Validar campos obrigatórios - IGNORAR CAMPOS OCULTOS
             let camposFaltando = [];
             const containersObrigatorios = document.querySelectorAll('.campo-obrigatorio');
 
             containersObrigatorios.forEach(container => {
-                if (container.style.display !== 'none') {
+                // VERIFICAR SE O CONTAINER ESTÁ VISÍVEL (não oculto)
+                const isVisible = container.offsetParent !== null &&
+                    container.style.display !== 'none' &&
+                    !container.classList.contains('d-none');
+
+                if (isVisible) {
                     const input = container.querySelector('input, select, textarea');
                     if (input && input.value.trim() === '') {
                         camposFaltando.push(input.name || input.id);
@@ -969,6 +985,7 @@
             });
 
             if (camposFaltando.length > 0) {
+                console.log('[DEBUG] Campos faltando:', camposFaltando);
                 alert('Por favor, preencha todos os campos obrigatórios marcados em vermelho!');
                 return;
             }
@@ -976,7 +993,6 @@
             // Enviar formulário
             gerarDocumentosComVisualizacao();
         }
-
         function gerarDocumentosComVisualizacao() {
             const submitBtn = document.getElementById('submit-btn');
             const form = document.getElementById('gerador-form');

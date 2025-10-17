@@ -465,10 +465,14 @@ def gerar_documento_visualizacao():
             modo = request.form.get('modo_medalha', 'individual')
         elif tipo_documento == 'Moeda' or tipo_documento == 'Moeda CBMAC':
             modo = request.form.get('modo_moeda', 'individual')
-        elif tipo_documento == 'Certificado' or tipo_documento == 'Certificado Amigo dos Veteranos':
+        elif tipo_documento == 'Certificados':
             modo = request.form.get('modo_certificado', 'individual')
+        elif tipo_documento == 'Convite':
+            # << NOVO >>
+            modo = request.form.get('modo_convite', 'individual')  # respeita Individual/Coletivo
         else:
             modo = 'individual'  # Para outros tipos sempre individual
+
         
         # Preparar dados baseado no tipo de documento
         if tipo_documento == 'Diplomas':
@@ -535,19 +539,41 @@ def gerar_documento_visualizacao():
                 'comandante_agradecimento': request.form.get('comandante_agradecimento')
             }
         elif tipo_documento == 'Convite':
-            nomes_texto = request.form.get('nome_convidado_convite', '')
-            dados_base = {
-                'cargo_convidado': request.form.get('cargo_convidado_convite'),
-                'pra_que_convidado': request.form.get('pra_que_convidado_convite'),
-                'data': request.form.get('data_convite'),
-                'horario': request.form.get('horario_convite'),
-                'local': request.form.get('local_convite'),
-                'cidade': request.form.get('cidade_convite'),
-                'endereco': request.form.get('endereco_convite'),
-                'posto': request.form.get('posto_convite'),
-                'comandante': request.form.get('comandante_convite'),
-                'genero_convidado': (request.form.get('genero_convidado_convite'))
-            }
+            if modo == 'coletivo':
+                # << COLETIVO: sem nome; usa tropa/traje >>
+                nomes_texto = 'COLETIVO'  # evita falhar na checagem de nomes
+                dados_base = {
+                    'posto': request.form.get('posto_convite'),
+                    'comandante': request.form.get('comandante_convite'),
+                    'pra_que_convidado': request.form.get('pra_que_convidado_convite'),
+                    'data': request.form.get('data_convite'),
+                    'horario': request.form.get('horario_convite'),
+                    'local': request.form.get('local_convite'),
+                    'cidade': request.form.get('cidade_convite'),
+                    'endereco': request.form.get('endereco_convite'),
+                    'modo_convite': 'coletivo',
+                    'tropa_convite': request.form.get('tropa_convite'),
+                    'traje_convite': request.form.get('traje_convite'),
+                }
+            else:
+                # << INDIVIDUAL: exige nome/gênero >>
+                nomes_texto = request.form.get('nome_convidado_convite', '')
+                dados_base = {
+                    'posto': request.form.get('posto_convite'),
+                    'comandante': request.form.get('comandante_convite'),
+                    'pra_que_convidado': request.form.get('pra_que_convidado_convite'),
+                    'data': request.form.get('data_convite'),
+                    'horario': request.form.get('horario_convite'),
+                    'local': request.form.get('local_convite'),
+                    'cidade': request.form.get('cidade_convite'),
+                    'endereco': request.form.get('endereco_convite'),
+                    'modo_convite': 'individual',
+                    'genero_convidado': request.form.get('genero_convidado_convite'),
+                    'cargo_convidado': request.form.get('cargo_convidado_convite'),
+
+                }
+
+      
         elif tipo_documento == 'Nota de Pesar':
             nomes_texto = request.form.get('falecido_nota_pesar', '')
             dados_base = {
@@ -562,9 +588,11 @@ def gerar_documento_visualizacao():
         
         # Processar nomes (múltiplos ou único)
         nomes = processar_multiplos_nomes(nomes_texto)
-        
-        if not nomes:
+
+        # Permite Convite Coletivo mesmo sem "nome"
+        if not nomes and not (tipo_documento == 'Convite' and modo == 'coletivo'):
             return jsonify({'error': 'Nenhum nome fornecido'}), 400
+
         
         # Gerar documentos
         arquivos_gerados = []

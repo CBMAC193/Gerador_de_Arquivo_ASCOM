@@ -210,23 +210,6 @@ def gerar_certificado_convite(dados: dict) -> str:
     print(f"  horario_evento: '{horario_evento}'")
     
     # Validar campos obrigatórios - falhar se estiver vazio
-    campos_obrigatorios = {
-        'Posto do Comandante': posto,
-        'Nome do Comandante': comandante,
-        'Cargo do Convidado': cargo_convidado,
-        'Nome do Convidado': nome_convidado,
-        'Finalidade do Convite': pra_que,
-        'Endereço': endereco,
-        'Local': local,
-        'Cidade': cidade,
-        'Data': data_evento,
-        'Horário': horario_evento
-    }
-    
-    campos_vazios = [nome for nome, valor in campos_obrigatorios.items() if not valor]
-    if campos_vazios:
-        raise ValueError(f"Campos obrigatórios não preenchidos: {', '.join(campos_vazios)}")
-    
     
     # Determinar o artigo baseado no gênero
     artigo_genero = "o senhor" if genero_convidado == "senhor" else "a senhora"
@@ -320,7 +303,7 @@ def gerar_certificado_convite(dados: dict) -> str:
         if campos_vazios:
             raise ValueError(f"Campos obrigatórios não preenchidos: {', '.join(campos_vazios)}")
         
-        # Construir texto principal para modo coletivo
+        # TEXTO CORRIGIDO PARA MODO COLETIVO
         posto_formatado = f"{posto} " if posto else ""
         
         TEXTO_PRINCIPAL = (
