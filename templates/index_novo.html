@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Certificados - CBMAC</title>
+    
+    <!-- Anti-cache headers -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #dc3545;
+            --primary-dark: #cc0000;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .header-cbmac {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+        }
+        
+        .btn-success {
+            background: #28a745 !important;
+            border-color: #28a745 !important;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover {
+            background: #218838 !important;
+            border-color: #218838 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-outline-secondary {
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-secondary:hover {
+            transform: translateY(-2px);
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .loading {
+            display: none !important;
+        }
+        
+        .loading.show {
+            display: flex !important;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Estilos do Formulário */
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+        
+        .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+        
+        .campo-obrigatorio input,
+        .campo-obrigatorio select,
+        .campo-obrigatorio textarea {
+            border-left: 3px solid #ff6b6b !important;
+        }
+        
+        .campo-obrigatorio.preenchido input,
+        .campo-obrigatorio.preenchido select,
+        .campo-obrigatorio.preenchido textarea {
+            border-left: 3px solid #51cf66 !important;
+        }
+        
+        .document-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .document-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .document-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+        
+        .required::after { 
+            content: " *"; 
+            color: #d00; 
+        }
+        
+        /* Seção de resultados (inicialmente oculta) */
+        #secao-resultados {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header-cbmac">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-1">
+                        <i class="fas fa-certificate me-3"></i>
+                        Gerador de Certificados
+                    </h1>
+                    <p class="mb-0 opacity-75">
+                        Corpo de Bombeiros Militar do Acre
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <i class="fas fa-shield-alt fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Formulário Principal -->
+            <div class="col-lg-8 mb-4">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Dados do Documento
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="gerador-form" method="POST" action="/gerar-documento-visualizacao">
+                            
+                            <!-- Seleção do Tipo de Documento -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <label for="tipo_documento" class="form-label required">Tipo de Documento</label>
+                                    <select class="form-select campo-obrigatorio" id="tipo_documento" name="tipo_documento" required>
+                                        <option value="">Selecione o tipo de documento</option>
+                                        <option value="Diplomas">Diplomas</option>
+                                        <option value="Medalhas">Medalhas</option>
+                                        <option value="Moeda CBMAC">Moeda CBMAC</option>
+                                        <option value="Certificado Amigo dos Veteranos">Certificado Amigo dos Veteranos</option>
+                                        <option value="Agradecimento">Agradecimento</option>
+                                        <option value="Convite">Convite</option>
+                                        <option value="Nota de Pesar">Nota de Pesar</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Campos Dinâmicos (serão preenchidos via JavaScript) -->
+                            <div id="campos-dinamicos">
+                                <!-- Os campos específicos aparecerão aqui baseado na seleção -->
+                            </div>
+
+                            <!-- Botão de Envio -->
+                            <div class="row mt-4">
+                                <div class="col-12 text-end">
+                                    <button type="button" id="submit-btn" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-file-earmark-plus me-2"></i>
+                                        Gerar Documento
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel Lateral de Informações -->
+            <div class="col-lg-4 mb-4">
+                <div class="card summary-card fade-in">
+                    <div class="card-body text-center">
+                        <i class="fas fa-info-circle fa-3x mb-3"></i>
+                        <h5>Como usar</h5>
+                        <p class="mb-0">
+                            1. Selecione o tipo de documento<br>
+                            2. Preencha os campos obrigatórios<br>
+                            3. Clique em "Gerar Documento"<br>
+                            4. Visualize e faça o download
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Painel de Status -->
+                <div class="card fade-in">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Status do Sistema
+                        </h6>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Sistema:</span>
+                            <span class="badge bg-success">Online</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Geradores:</span>
+                            <span class="badge bg-success">Ativos</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Última atualização:</span>
+                            <span class="text-muted">Hoje</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Resultados (aparece após gerar documentos) -->
+        <div id="secao-resultados" class="row">
+            <!-- Resumo dos Resultados -->
+            <div class="col-md-4 mb-4">
+                <div class="card summary-card fade-in">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-circle fa-3x mb-3"></i>
+                        <h3 id="total-docs">0</h3>
+                        <p class="mb-2" id="texto-documentos">Documentos Gerados</p>
+                        <small class="opacity-75">
+                            <i class="fas fa-certificate me-1"></i>
+                            <span id="tipo-documento-resultado"></span>
+                        </small>
+                    </div>
+                </div>
+                
+                <!-- Ações de Download -->
+                <div class="card fade-in">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-download me-2"></i>
+                            Downloads
+                        </h5>
+                        
+                        <div id="acoes-documento-unico" style="display: none;">
+                            <button class="btn btn-primary w-100 mb-2" onclick="visualizarPDFUnico()">
+                                <i class="fas fa-eye me-2"></i>
+                                Visualizar PDF
+                            </button>
+                            <button class="btn btn-success w-100 mb-3" onclick="downloadDocumentoUnico()">
+                                <i class="fas fa-download me-2"></i>
+                                Download Documento
+                            </button>
+                        </div>
+                        
+                        <div id="acoes-multiplos-documentos" style="display: none;">
+                            <button class="btn btn-success w-100 mb-3" onclick="downloadTodosDocumentos()">
+                                <i class="fas fa-file-archive me-2"></i>
+                                Download Todos (ZIP)
+                            </button>
+                        </div>
+                        
+                        <button class="btn btn-outline-secondary w-100" onclick="gerarNovosDocumentos()">
+                            <i class="fas fa-plus me-2"></i>
+                            Gerar Novos Documentos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Documentos Gerados -->
+            <div class="col-md-8 mb-4">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2"></i>
+                            <span id="titulo-lista-docs">Documentos Gerados</span>
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="lista-documentos-gerados" class="document-list p-3">
+                            <!-- Lista será preenchida dinamicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.7); z-index: 9999;">
+        <div class="text-center text-white">
+            <div class="spinner-border mb-3" role="status"></div>
+            <p>Preparando download...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Variável global para armazenar dados da sessão atual
+        let sessaoAtual = null;
+        
+        // Configuração dos tipos e subtipos de documentos
+        const tipos = {
+            'Diplomas': [
+                'Bravura Bombeiro Militar',
+                'Ordem do Mérito Dom Pedro II, no grau Cavaleiro',
+                'Ordem do Mérito Dom Pedro II, no grau Comendador',
+                'Ordem do Mérito Dom Pedro II, no grau Grã-Oficial'
+            ],
+            'Medalhas': [
+                'Amigo',
+                'Bombeiro Durão',
+                'Bombeiro Militar Guardião da Floresta Amazônica',
+                'Comando Coragem e Abnegação',
+                'Comportamento Exemplar Madre Tereza de Calcutá',
+                'Defesa Civil – Vale do Acre',
+                'Ensino e Instrução',
+                'Honra Capacete Bombeiro Militar',
+                'Honra Machadinha Simbólica',
+                'Mérito Administrativo',
+                'Mérito Desportivo Militar',
+                'Mérito Intelectual',
+                'Mérito Intelectual Bronze',
+                'Mérito Mulher Acreana',
+                'Reservista',
+                'Tempo de Serviço'
+            ]
+        };
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar eventos
+            document.getElementById('tipo_documento').addEventListener('change', configurarCamposDinamicos);
+            document.getElementById('submit-btn').addEventListener('click', processarFormulario);
+            
+            // Configurar campos dinâmicos inicial
+            configurarCamposDinamicos();
+        });
+        
+        // Aqui vou adicionar todas as funções do formulário original...
+        // (Vou continuar adicionando o restante do JavaScript)
+    </script>
+</body>
+</html>

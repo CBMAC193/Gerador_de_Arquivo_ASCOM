@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Documento ASCOM</title>
+
+    <!-- Anti-cache headers -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}">
+
+    <!-- Bootstrap Icons -->
+    <link href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #dc3545;
+            --primary-dark: #cc0000;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            min-height: 100vh;
+        }
+
+        .header-cbmac {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-success {
+            background: #28a745 !important;
+            border-color: #28a745 !important;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background: #218838 !important;
+            border-color: #218838 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-outline-secondary {
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .loading {
+            display: none !important;
+        }
+
+        .loading.show {
+            display: flex !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilos do Formulário */
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+
+        .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+
+        /* Indicadores visuais para campos obrigatórios */
+        .campo-obrigatorio {
+            position: relative;
+        }
+
+        .campo-obrigatorio::after {
+            content: " *";
+            color: red;
+            font-weight: bold;
+        }
+
+        .campo-obrigatorio input,
+        .campo-obrigatorio select,
+        .campo-obrigatorio textarea {
+            border-left: 3px solid #ff6b6b !important;
+        }
+
+        .campo-obrigatorio.preenchido input,
+        .campo-obrigatorio.preenchido select,
+        .campo-obrigatorio.preenchido textarea {
+            border-left: 3px solid #51cf66 !important;
+        }
+
+        .campo-faltando {
+            animation: pulse-red 1s ease-in-out;
+            background-color: rgba(255, 107, 107, 0.1) !important;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                background-color: rgba(255, 107, 107, 0.3);
+            }
+
+            50% {
+                background-color: rgba(255, 107, 107, 0.1);
+            }
+
+            100% {
+                background-color: rgba(255, 107, 107, 0.05);
+            }
+        }
+
+        .document-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .document-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .document-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .required::after {
+            content: " *";
+            color: #d00;
+        }
+
+        /* Seção de resultados sempre visível */
+        #secao-resultados {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width:576px) {
+            .card {
+                border-width: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header-cbmac">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-1">
+                        <i class="fas fa-certificate me-3"></i>
+                        Gerador de Documento ASCOM
+                    </h1>
+                    <p class="mb-0 opacity-75">
+                        Assessoria de Comunicação - CBMAC
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <i class="fas fa-shield-alt fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <!-- Seção Principal (Formulário) -->
+        <div id="secao-principal" class="row">
+            <!-- Formulário Principal -->
+            <div class="col-lg-8 mb-4">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Dados do Documento
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="gerador-form" method="POST" action="/gerar-documento-visualizacao">
+
+                            <!-- Seleção do Tipo de Documento -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="tipo" class="form-label required">Tipo de Documento</label>
+                                    <select class="form-select campo-obrigatorio" id="tipo" name="tipo" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="Diplomas">Diplomas</option>
+                                        <option value="Medalhas">Medalhas</option>
+                                        <option value="Moeda">Moeda CBMAC</option>
+                                        <option value="Certificado">Certificado Amigo dos Veteranos</option>
+                                        <option value="Agradecimento">Agradecimento</option>
+                                        <option value="Convite">Convite</option>
+                                        <option value="Nota de Pesar">Nota de Pesar</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6" id="subtipo-col" style="display:none;">
+                                    <label for="subtipo" class="form-label">Subtipo</label>
+                                    <select class="form-select" id="subtipo" name="subtipo">
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6" id="subsubtipo-col" style="display:none;">
+                                    <label for="subsubtipo" class="form-label">Detalhe</label>
+                                    <select class="form-select" id="subsubtipo" name="subsubtipo">
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Campos Dinâmicos (serão preenchidos via JavaScript) -->
+                            <div id="campos-dinamicos">
+                                <!-- Os campos específicos aparecerão aqui baseado na seleção -->
+                            </div>
+
+                            <!-- Botão de Envio -->
+                            <div class="row mt-4">
+                                <div class="col-12 text-end">
+                                    <button type="button" id="submit-btn" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-file-earmark-plus me-2"></i>
+                                        Gerar Documento
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel Lateral com Resultados -->
+            <div class="col-lg-4 mb-4">
+                <!-- Resumo dos Resultados -->
+                <div class="card summary-card fade-in">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-circle fa-3x mb-3"></i>
+                        <h3 id="total-docs">{{ contador_documentos or 0 }}</h3>
+                        <p class="mb-2" id="texto-documentos">Documentos Gerados</p>
+                        <small class="opacity-75">
+                            <i class="fas fa-certificate me-1"></i>
+                            <span id="tipo-documento-resultado">-</span>
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Ações de Download -->
+                <div class="card fade-in">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-download me-2"></i>
+                            Downloads
+                        </h5>
+
+                        <div id="acoes-documento-unico" style="display: none;">
+                            <button class="btn btn-primary w-100 mb-2" onclick="visualizarPDFUnico()">
+                                <i class="fas fa-eye me-2"></i>
+                                Visualizar PDF
+                            </button>
+                            <button class="btn btn-success w-100 mb-3" onclick="downloadDocumentoUnico()">
+                                <i class="fas fa-download me-2"></i>
+                                Download Documento
+                            </button>
+                        </div>
+
+                        <div id="acoes-multiplos-documentos" style="display: none;">
+                            <button class="btn btn-success w-100 mb-3" onclick="downloadTodosDocumentos()">
+                                <i class="fas fa-file-archive me-2"></i>
+                                Download Todos
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay"
+        class="loading position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+        style="background: rgba(0,0,0,0.7); z-index: 9999;">
+        <div class="text-center text-white">
+            <div class="spinner-border mb-3" role="status"></div>
+            <p>Preparando download...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <script>
+        // Variável global para armazenar dados da sessão atual
+        let sessaoAtual = null;
+
+        // Configuração básica do formulário
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Sistema carregado!');
+
+            // Configurar evento do formulário
+            document.getElementById('submit-btn').addEventListener('click', processarFormulario);
+
+            // Configurar campos dinâmicos
+            document.getElementById('tipo').addEventListener('change', configurarCamposDinamicos);
+
+            // Atualizar contador de documentos
+            atualizarContador();
+        });
+
+        function configurarCamposDinamicos() {
+            const tipo = document.getElementById('tipo').value;
+            const container = document.getElementById('campos-dinamicos');
+
+            // Limpar campos existentes e remover indicadores visuais
+            container.innerHTML = '';
+            removerTodosIndicadoresVisuais();
+
+            // Ocultar coluna de subtipo primeiro
+            document.getElementById('subtipo-col').style.display = 'none';
+            document.getElementById('subsubtipo-col').style.display = 'none';
+
+            if (!tipo) return;
+
+            // Configurar subtipos se disponível
+            configurarSubtipos(tipo);
+
+            let campos = [];
+
+            switch (tipo) {
+                case 'Diplomas':
+                    campos = [
+                        { nome: 'nome_diploma', label: 'Nome da Pessoa Agraciada', tipo: 'text', obrigatorio: true, temModo: true },
+                        { nome: 'decreto_diploma', label: 'Decreto', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6' },
+                        { nome: 'local_diploma', label: 'Local', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'data_diploma', label: 'Data', tipo: 'date', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'comandante_diploma', label: 'Nome do Comandante Geral', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' }
+                    ];
+                    break;
+
+                case 'Medalhas':
+                    campos = [
+                        { nome: 'nome_medalha', label: 'Nome da Pessoa Agraciada', tipo: 'text', obrigatorio: true, temModo: true },
+                        { nome: 'decreto_medalha', label: 'Decreto', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6' },
+                        { nome: 'local_medalha', label: 'Local', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'data_medalha', label: 'Data', tipo: 'date', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'comandante_medalha', label: 'Nome do Comandante Geral', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' }
+                    ];
+                    break;
+
+                case 'Moeda':
+                    campos = [
+                        { nome: 'nome_moeda', label: 'Nome da Pessoa Agraciada', tipo: 'text', obrigatorio: true, temModo: true },
+                        { nome: 'decreto_moeda', label: 'Decreto', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6' },
+                        { nome: 'local_moeda', label: 'Local', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'data_moeda', label: 'Data', tipo: 'date', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'comandante_moeda', label: 'Nome do Comandante Geral', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' }
+                    ];
+                    break;
+
+                case 'Certificado':
+                    campos = [
+                        { nome: 'nome_certificado', label: 'Nome da Pessoa Agraciada', tipo: 'text', obrigatorio: true, temModo: true },
+                        { nome: 'decreto_certificado', label: 'Decreto', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6' },
+                        { nome: 'local_certificado', label: 'Local', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'data_certificado', label: 'Data', tipo: 'date', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'comandante_certificado', label: 'Nome do Comandante Geral', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' }
+                    ];
+                    break;
+
+                case 'Agradecimento':
+                    campos = [
+                        { nome: 'nome_agradecido_agradecimento', label: 'Nome do Agradecido', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6' },
+                        { nome: 'funcao_agradecimento', label: 'Função', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6' },
+                        { nome: 'local_funcao_agradecimento', label: 'Local da Função', tipo: 'text', obrigatorio: false, tamanho: 'col-md-4' },
+                        { nome: 'pelo_que_agradecimento', label: 'Pelo que', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'tema_agradecimento', label: 'Tema', tipo: 'text', obrigatorio: false, tamanho: 'col-md-4' },
+                        { nome: 'local_agradecimento', label: 'Local', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'data_agradecimento', label: 'Data', tipo: 'date', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'comandante_agradecimento', label: 'Nome do Comandante Geral', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' }
+                    ];
+                    break;
+
+                case 'Convite':
+                    campos = [
+                        {
+                            nome: 'genero_convidado_convite', label: 'Gênero do Convidado', tipo: 'select', obrigatorio: true, tamanho: 'col-md-3', opcoes: [
+                                { valor: 'senhor', texto: 'Senhor' },
+                                { valor: 'senhora', texto: 'Senhora' }
+                            ], individual: true
+                        },
+                        { nome: 'cargo_convidado_convite', label: 'Cargo do Convidado', tipo: 'text', obrigatorio: true, tamanho: 'col-md-5', individual: true },
+                        { nome: 'nome_convidado_convite', label: 'Nome do Convidado', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4', individual: true },
+                        {
+                            nome: 'tropa_convite', label: 'Tropa', tipo: 'select', obrigatorio: true, tamanho: 'col-md-4', coletivo: true, opcoes: [
+                                { valor: 'Todos', texto: 'Todos' },
+                                { valor: 'Praças', texto: 'Praças' },
+                                { valor: 'Oficiais', texto: 'Oficiais' }
+                            ]
+                        },
+                        { nome: 'pra_que_convidado_convite', label: 'Pra que foi convidado', tipo: 'text', obrigatorio: true, tamanho: 'col-md-12' },
+                        { nome: 'data_convite', label: 'Data', tipo: 'date', obrigatorio: true, tamanho: 'col-md-3' },
+                        { nome: 'horario_convite', label: 'Horário', tipo: 'time', obrigatorio: true, tamanho: 'col-md-3' },
+                        { nome: 'local_convite', label: 'Local', tipo: 'text', obrigatorio: true, tamanho: 'col-md-3' },
+                        { nome: 'cidade_convite', label: 'Cidade', tipo: 'text', obrigatorio: true, tamanho: 'col-md-3' },
+                        { nome: 'endereco_convite', label: 'Endereço', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6' },
+                        { nome: 'traje_convite', label: 'Traje', tipo: 'text', obrigatorio: true, tamanho: 'col-md-6', coletivo: true },
+                        { nome: 'posto_convite', label: 'Posto', tipo: 'text', obrigatorio: true, tamanho: 'col-md-3' },
+                        { nome: 'comandante_convite', label: 'Nome do Comandante Geral', tipo: 'text', obrigatorio: true, tamanho: 'col-md-3' }
+                    ];
+                    break;
+
+                case 'Nota de Pesar':
+                    campos = [
+                        { nome: 'falecido_nota_pesar', label: 'Falecido', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'parentesco_nota_pesar', label: 'Parentesco', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'pessoa_enlutada_nota_pesar', label: 'Pessoa Enlutada', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'local_nota_pesar', label: 'Local', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'data_nota_pesar', label: 'Data', tipo: 'date', obrigatorio: true, tamanho: 'col-md-4' },
+                        { nome: 'comandante_nota_pesar', label: 'Nome do Comandante Geral', tipo: 'text', obrigatorio: true, tamanho: 'col-md-4' }
+                    ];
+                    break;
+
+                default:
+                    return;
+            }
+
+            // Criar HTML dos campos
+            let html = '<div class="row g-3">';
+
+            // Verificar se é um tipo que tem modo individual/coletivo
+            const tiposComModoConvite = ['Convite'];
+            
+            if (tiposComModoConvite.includes(tipo)) {
+                // Adicionar seleção de modo para convites
+                html += `
+                    <div class="col-12">
+                        <label class="form-label">
+                            <i class="bi bi-people"></i> Tipo de Convite
+                        </label>
+                        <div class="mb-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="modo_convite" id="individual_convite" value="individual" checked>
+                                <label class="form-check-label" for="individual_convite">
+                                    <i class="bi bi-person"></i> Individual
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="modo_convite" id="coletivo_convite" value="coletivo">
+                                <label class="form-check-label" for="coletivo_convite">
+                                    <i class="bi bi-people-fill"></i> Coletivo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            campos.forEach(campo => {
+                const tamanho = campo.tamanho || 'col-md-6';
+                
+                // Verificar se o campo é específico para modo individual ou coletivo
+                let classeVisibilidade = '';
+                if (campo.individual) {
+                    classeVisibilidade = 'campo-individual';
+                } else if (campo.coletivo) {
+                    classeVisibilidade = 'campo-coletivo';
+                    // Campos coletivos começam ocultos
+                    classeVisibilidade += ' d-none';
+                }
+
+                if (campo.temModo) {
+                    // Campo com modo individual/lista
+                    const tipoLowerCase = campo.nome.split('_')[1]; // diploma, medalha, etc.
+                    html += `
+                        <div class="col-12">
+                            <label class="form-label">
+                                <i class="bi bi-person-plus"></i> Modo de Geração
+                            </label>
+                            <div class="mb-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="modo_${tipoLowerCase}" id="individual_${tipoLowerCase}" value="individual" checked>
+                                    <label class="form-check-label" for="individual_${tipoLowerCase}">
+                                        <i class="bi bi-person"></i> Individual
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="modo_${tipoLowerCase}" id="lista_${tipoLowerCase}" value="lista">
+                                    <label class="form-check-label" for="lista_${tipoLowerCase}">
+                                        <i class="bi bi-people"></i> Lista (múltiplas páginas em um PDF)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" id="campo_${campo.nome}">
+                            <label class="form-label" for="${campo.nome}">
+                                <span id="label_${campo.nome}">${campo.label}</span>
+                            </label>
+                            <input class="form-control" type="${campo.tipo}" id="${campo.nome}" name="${campo.nome}" ${campo.obrigatorio ? 'required' : ''} placeholder="Digite o nome da pessoa">
+                            <textarea class="form-control" id="${campo.nome}_lista" name="${campo.nome}_lista" rows="3" style="display:none;"
+                                placeholder="Digite múltiplos nomes separados por vírgula, ponto e vírgula ou quebra de linha."></textarea>
+                            <div class="form-text" id="help_${campo.nome}">
+                                <i class="bi bi-info-circle"></i> 
+                                <span id="text_help_${tipoLowerCase}">Digite o nome da pessoa que receberá o documento.</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Campo normal
+                    if (campo.tipo === 'select') {
+                        // Campo de seleção
+                        let opcoesHtml = '';
+                        if (campo.opcoes) {
+                            campo.opcoes.forEach(opcao => {
+                                opcoesHtml += `<option value="${opcao.valor}">${opcao.texto}</option>`;
+                            });
+                        }
+                        html += `
+                            <div class="${tamanho} ${classeVisibilidade}">
+                                <label class="form-label" for="${campo.nome}">${campo.label}</label>
+                                <select class="form-select" id="${campo.nome}" name="${campo.nome}" ${campo.obrigatorio ? 'required' : ''}>
+                                    <option value="">Selecione...</option>
+                                    ${opcoesHtml}
+                                </select>
+                            </div>
+                        `;
+                    } else {
+                        // Campo de entrada normal
+                        html += `
+                            <div class="${tamanho} ${classeVisibilidade}">
+                                <label class="form-label" for="${campo.nome}">${campo.label}</label>
+                                <input class="form-control" type="${campo.tipo}" id="${campo.nome}" name="${campo.nome}" ${campo.obrigatorio ? 'required' : ''}>
+                            </div>
+                        `;
+                    }
+                }
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+
+            // Configurar controles de modo para convites
+            if (tipo === 'Convite') {
+                configurarModoConvite();
+            }
+
+            // Configurar controles de modo se necessário
+            configurarModoControles(tipo);
+
+            // Configurar indicadores visuais para campos obrigatórios (com delay para garantir que elementos existam)
+            setTimeout(() => {
+                configurarIndicadoresVisuais();
+            }, 100);
+        }
+
+        // Função para remover todos os indicadores visuais
+        function removerTodosIndicadoresVisuais() {
+            const allContainers = document.querySelectorAll('.campo-obrigatorio');
+            allContainers.forEach(container => {
+                container.classList.remove('campo-obrigatorio', 'preenchido');
+            });
+
+            const allFields = document.querySelectorAll('.campo-faltando');
+            allFields.forEach(field => {
+                field.classList.remove('campo-faltando');
+            });
+        }
+
+        // Função para adicionar indicador visual de campo obrigatório
+        function addVisualIndicator(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                const container = field.closest('.mb-3') || field.closest('.col-md-6') || field.closest('.col-12') || field.closest('.col-md-3') || field.closest('.col-md-4') || field.closest('.col-md-5');
+                if (container) {
+                    container.classList.add('campo-obrigatorio');
+                    console.log(`[DEBUG] Indicador adicionado para: ${fieldId}`);
+                    // Verificar se o campo já está preenchido
+                    if (field.value.trim() !== '') {
+                        container.classList.add('preenchido');
+                    }
+                } else {
+                    console.log(`[DEBUG] Container não encontrado para: ${fieldId}`);
+                }
+            } else {
+                console.log(`[DEBUG] Campo não encontrado: ${fieldId}`);
+            }
+        }
+
+        // Função para configurar indicadores visuais
+        function configurarIndicadoresVisuais() {
+            const tipo = document.getElementById('tipo').value;
+
+            // Adicionar indicador para tipo de documento
+            addVisualIndicator('tipo');
+
+            // Adicionar indicadores para campos específicos baseado no tipo
+            if (tipo === 'Diplomas') {
+                addVisualIndicator('nome_diploma');
+                addVisualIndicator('decreto_diploma');
+                addVisualIndicator('local_diploma');
+                addVisualIndicator('data_diploma');
+                addVisualIndicator('comandante_diploma');
+            } else if (tipo === 'Medalhas') {
+                addVisualIndicator('nome_medalha');
+                addVisualIndicator('decreto_medalha');
+                addVisualIndicator('local_medalha');
+                addVisualIndicator('data_medalha');
+                addVisualIndicator('comandante_medalha');
+            } else if (tipo === 'Moeda CBMAC') {
+                addVisualIndicator('nome_moeda');
+                addVisualIndicator('decreto_moeda');
+                addVisualIndicator('local_moeda');
+                addVisualIndicator('data_moeda');
+                addVisualIndicator('comandante_moeda');
+            } else if (tipo === 'Certificado Amigo dos Veteranos') {
+                addVisualIndicator('nome_certificado');
+                addVisualIndicator('decreto_certificado');
+                addVisualIndicator('local_certificado');
+                addVisualIndicator('data_certificado');
+                addVisualIndicator('comandante_certificado');
+            } else if (tipo === 'Agradecimento') {
+                addVisualIndicator('nome_agradecido_agradecimento');
+                addVisualIndicator('funcao_agradecimento');
+                addVisualIndicator('pelo_que_agradecimento');
+                addVisualIndicator('local_agradecimento');
+                addVisualIndicator('data_agradecimento');
+                addVisualIndicator('comandante_agradecimento');
+            } else if (tipo === 'Convite') {
+                // Verificar qual modo está selecionado
+                const modoConvite = document.querySelector('input[name="modo_convite"]:checked')?.value || 'individual';
+                
+                if (modoConvite === 'individual') {
+                    addVisualIndicator('genero_convidado_convite');
+                    addVisualIndicator('cargo_convidado_convite');
+                    addVisualIndicator('nome_convidado_convite');
+                } else {
+                    addVisualIndicator('tropa_convite');
+                    addVisualIndicator('traje_convite');
+                }
+                
+                // Campos comuns
+                addVisualIndicator('pra_que_convidado_convite');
+                addVisualIndicator('data_convite');
+                addVisualIndicator('horario_convite');
+                addVisualIndicator('local_convite');
+                addVisualIndicator('cidade_convite');
+                addVisualIndicator('endereco_convite');
+                addVisualIndicator('posto_convite');
+                addVisualIndicator('comandante_convite');
+            } else if (tipo === 'Nota de Pesar') {
+                addVisualIndicator('falecido_nota_pesar');
+                addVisualIndicator('parentesco_nota_pesar');
+                addVisualIndicator('pessoa_enlutada_nota_pesar');
+                addVisualIndicator('local_nota_pesar');
+                addVisualIndicator('data_nota_pesar');
+                addVisualIndicator('comandante_nota_pesar');
+            }
+
+            // Configurar listeners para todos os inputs
+            const allInputs = document.querySelectorAll('input, select, textarea');
+            allInputs.forEach(input => {
+                input.addEventListener('input', function () {
+                    const container = this.closest('.mb-3') || this.closest('.col-md-6') || this.closest('.col-12');
+                    if (container && container.classList.contains('campo-obrigatorio')) {
+                        if (this.value.trim() !== '') {
+                            container.classList.add('preenchido');
+                        } else {
+                            container.classList.remove('preenchido');
+                        }
+                    }
+
+                    // Remover animação de campo faltando quando preenchido
+                    if (this.value.trim() !== '') {
+                        this.classList.remove('campo-faltando');
+                    }
+                });
+            });
+        }
+
+
+
+        // Configuração dos tipos e subtipos baseada no arquivo original
+        const tipos = {
+            'Diplomas': [
+                'Bravura Bombeiro Militar',
+                'Ordem do Mérito Dom Pedro II, no grau Cavaleiro',
+                'Ordem do Mérito Dom Pedro II, no grau Comendador',
+                'Ordem do Mérito Dom Pedro II, no grau Grã-Oficial'
+            ],
+            'Medalhas': [
+                'Amigo',
+                'Bombeiro Durão',
+                'Bombeiro Militar Guardião da Floresta Amazônica',
+                'Comando Coragem e Abnegação',
+                'Comportamento Exemplar Madre Tereza de Calcutá',
+                'Defesa Civil – Vale do Acre',
+                'Ensino e Instrução',
+                'Honra Capacete Bombeiro Militar',
+                'Honra Machadinha Simbólica',
+                'Mérito Administrativo',
+                'Mérito Desportivo Militar',
+                'Mérito Intelectual',
+                'Mérito Intelectual Bronze',
+                'Mérito Mulher Acreana',
+                'Reservista',
+                'Tempo de Serviço'
+            ]
+        };
+
+        // Subtipos aninhados (terceiro nível) - usado para medalhas de tempo de serviço
+        const nested = {
+            'Medalhas': {
+                'Tempo de Serviço': [
+                    '10 ANOS de serviço',
+                    '20 ANOS de serviço',
+                    '30 ANOS de serviço'
+                ]
+            }
+        };
+
+        function configurarSubtipos(tipo) {
+            const subtipoCol = document.getElementById('subtipo-col');
+            const subtipoEl = document.getElementById('subtipo');
+            const subsubCol = document.getElementById('subsubtipo-col');
+            const subsubEl = document.getElementById('subsubtipo');
+
+            // Resetar subtipos
+            subtipoEl.innerHTML = '<option value="">Selecione...</option>';
+            subsubEl.innerHTML = '<option value="">Selecione...</option>';
+            subsubCol.style.display = 'none';
+
+            // Configurar subtipos se disponível
+            if (tipos[tipo]) {
+                subtipoCol.style.display = 'block';
+                tipos[tipo].forEach(subtipo => {
+                    const opt = document.createElement('option');
+                    opt.value = subtipo;
+                    opt.textContent = subtipo;
+                    subtipoEl.appendChild(opt);
+                });
+
+                // Adicionar listener para subtipos aninhados
+                subtipoEl.addEventListener('change', function () {
+                    const subtipo = this.value;
+                    subsubCol.style.display = 'none';
+                    subsubEl.innerHTML = '<option value="">Selecione...</option>';
+
+                    if (nested[tipo] && nested[tipo][subtipo]) {
+                        subsubCol.style.display = 'block';
+                        nested[tipo][subtipo].forEach(subsubtipo => {
+                            const opt = document.createElement('option');
+                            opt.value = subsubtipo;
+                            opt.textContent = subsubtipo;
+                            subsubEl.appendChild(opt);
+                        });
+                    }
+                });
+            } else {
+                subtipoCol.style.display = 'none';
+            }
+        }
+
+        function configurarModoControles(tipo) {
+            const tiposComModo = {
+                'Diplomas': 'diploma',
+                'Medalhas': 'medalha',
+                'Moeda': 'moeda',
+                'Certificado': 'certificado'
+            };
+
+            if (!tiposComModo[tipo]) return;
+
+            const prefixo = tiposComModo[tipo];
+            const radioIndividual = document.getElementById(`individual_${prefixo}`);
+            const radioLista = document.getElementById(`lista_${prefixo}`);
+            const inputIndividual = document.getElementById(`nome_${prefixo}`);
+            const textareaLista = document.getElementById(`nome_${prefixo}_lista`);
+            const labelNome = document.getElementById(`label_nome_${prefixo}`);
+            const textHelp = document.getElementById(`text_help_${prefixo}`);
+
+            if (radioIndividual && radioLista && inputIndividual && textareaLista && labelNome && textHelp) {
+                function alternarModo() {
+                    const isLista = radioLista.checked;
+
+                    if (isLista) {
+                        inputIndividual.style.display = 'none';
+                        textareaLista.style.display = 'block';
+                        textareaLista.required = true;
+                        inputIndividual.required = false;
+                    } else {
+                        inputIndividual.style.display = 'block';
+                        textareaLista.style.display = 'none';
+                        inputIndividual.required = true;
+                        textareaLista.required = false;
+                    }
+                }
+
+                radioIndividual.addEventListener('change', alternarModo);
+                radioLista.addEventListener('change', alternarModo);
+                alternarModo(); // Configurar estado inicial
+            }
+        }
+
+        function configurarModoConvite() {
+            const radioIndividual = document.getElementById('individual_convite');
+            const radioColetivo = document.getElementById('coletivo_convite');
+
+            if (radioIndividual && radioColetivo) {
+                function alternarModoConvite() {
+                    const isColetivo = radioColetivo.checked;
+                    
+                    // Campos individuais
+                    const camposIndividuais = document.querySelectorAll('.campo-individual');
+                    // Campos coletivos
+                    const camposColetivos = document.querySelectorAll('.campo-coletivo');
+                    
+                    if (isColetivo) {
+                        // Modo coletivo: ocultar campos individuais, mostrar coletivos
+                        camposIndividuais.forEach(campo => {
+                            campo.classList.add('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = false;
+                        });
+                        
+                        camposColetivos.forEach(campo => {
+                            campo.classList.remove('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = true;
+                        });
+                    } else {
+                        // Modo individual: mostrar campos individuais, ocultar coletivos
+                        camposIndividuais.forEach(campo => {
+                            campo.classList.remove('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = true;
+                        });
+                        
+                        camposColetivos.forEach(campo => {
+                            campo.classList.add('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = false;
+                        });
+                    }
+                }
+
+                radioIndividual.addEventListener('change', alternarModoConvite);
+                radioColetivo.addEventListener('change', alternarModoConvite);
+                alternarModoConvite(); // Configurar estado inicial
+            }
+        }
+
+        function processarFormulario(e) {
+            e.preventDefault();
+
+            const tipo = document.getElementById('tipo').value;
+            if (!tipo) {
+                alert('Por favor, selecione o tipo de documento!');
+                return;
+            }
+
+            // Validar campos obrigatórios usando o novo sistema
+            let camposFaltando = [];
+            const containersObrigatorios = document.querySelectorAll('.campo-obrigatorio');
+
+            containersObrigatorios.forEach(container => {
+                if (container.style.display !== 'none') {
+                    const input = container.querySelector('input, select, textarea');
+                    if (input && input.value.trim() === '') {
+                        camposFaltando.push(input.name || input.id);
+                        input.classList.add('campo-faltando');
+                        // Remover classe preenchido se estiver presente
+                        container.classList.remove('preenchido');
+                    }
+                }
+            });
+
+            if (camposFaltando.length > 0) {
+                alert('Por favor, preencha todos os campos obrigatórios marcados em vermelho!');
+                return;
+            }
+
+            // Enviar formulário
+            gerarDocumentosComVisualizacao();
+        }
+
+        function gerarDocumentosComVisualizacao() {
+            const submitBtn = document.getElementById('submit-btn');
+            const form = document.getElementById('gerador-form');
+
+            // Mostrar loading
+            submitBtn.innerHTML = '<i class="spinner-border spinner-border-sm me-2"></i>Gerando...';
+            submitBtn.disabled = true;
+
+            // Preparar dados do formulário
+            const formData = new FormData(form);
+
+            // Enviar via fetch
+            fetch('/gerar-documento-visualizacao', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => Promise.reject(err));
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Resposta do servidor:', data);
+
+                    if (data.success) {
+                        mostrarResultados(data);
+                    } else {
+                        alert('Erro: ' + (data.error || 'Erro desconhecido'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao gerar documentos:', error);
+                    alert('Erro ao gerar documentos: ' + (error.error || error.message || 'Erro desconhecido'));
+                })
+                .finally(() => {
+                    // Restaurar botão
+                    submitBtn.innerHTML = '<i class="bi bi-file-earmark-plus me-2"></i>Gerar Documento';
+                    submitBtn.disabled = false;
+                });
+        }
+
+        function mostrarResultados(data) {
+            sessaoAtual = data;
+
+            // Atualizar informações do resumo com contador global persistente
+            document.getElementById('total-docs').textContent = data.total_geral_documentos || data.total_documentos;
+            document.getElementById('tipo-documento-resultado').textContent = data.tipo_documento;
+
+            const plural = data.total_documentos > 1 ? 's' : '';
+            document.getElementById('texto-documentos').textContent = `Documento${plural} Gerado${plural}`;
+
+            // Mostrar ações apropriadas
+            if (data.total_documentos === 1) {
+                document.getElementById('acoes-documento-unico').style.display = 'block';
+                document.getElementById('acoes-multiplos-documentos').style.display = 'none';
+            } else {
+                document.getElementById('acoes-documento-unico').style.display = 'none';
+                document.getElementById('acoes-multiplos-documentos').style.display = 'block';
+            }
+
+            // Sistema simplificado para documento único
+            console.log('Documento gerado com sucesso:', data);
+        }
+
+        // Função removida - sistema simplificado sem lista de documentos
+
+        // Funções de visualização e download
+        function visualizarPDFUnico() {
+            if (sessaoAtual && sessaoAtual.arquivo_principal) {
+                window.open(`/visualizar-pdf/${sessaoAtual.arquivo_principal.nome_arquivo}`, '_blank');
+            }
+        }
+
+        function visualizarPDFIndividual(nomeArquivo) {
+            window.open(`/visualizar-pdf/${nomeArquivo}`, '_blank');
+        }
+
+        function downloadDocumentoUnico() {
+            if (sessaoAtual && sessaoAtual.arquivo_principal) {
+                mostrarLoading(true);
+                window.location.href = `/download-pdf/${sessaoAtual.arquivo_principal.nome_arquivo}`;
+                setTimeout(() => mostrarLoading(false), 3000);
+            }
+        }
+
+        function downloadTodosDocumentos() {
+            // Para múltiplos documentos, baixar individualmente
+            if (sessaoAtual && sessaoAtual.arquivos) {
+                sessaoAtual.arquivos.forEach((arquivo, index) => {
+                    setTimeout(() => {
+                        window.location.href = `/download-pdf/${arquivo.nome_arquivo}`;
+                    }, index * 1000); // Delay entre downloads
+                });
+            }
+        }
+
+        function downloadIndividual(nomeArquivo) {
+            mostrarLoading(true);
+            window.location.href = `/download-pdf/${nomeArquivo}`;
+            setTimeout(() => mostrarLoading(false), 2000);
+        }
+
+
+        // Função para atualizar contador ao carregar a página
+        function atualizarContador() {
+            fetch('/contador-documentos')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('total-docs').textContent = data.total_documentos;
+                })
+                .catch(error => {
+                    console.log('Erro ao obter contador:', error);
+                });
+        }
+
+        function mostrarLoading(show) {
+            const loading = document.getElementById('loading-overlay');
+            if (show) {
+                loading.classList.add('show');
+                loading.style.display = 'flex';
+            } else {
+                loading.classList.remove('show');
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

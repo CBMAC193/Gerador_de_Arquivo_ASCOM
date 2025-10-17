@@ -1,0 +1,7 @@
+Flask
+fpdf
+selenium
+reportlab
+Pillow
+requests
+PyPDF2

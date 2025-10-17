@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<!--
+Sistema Gerador de Certificados CBMAC
+=====================================
+Interface web para geração de documentos oficiais do Corpo de Bombeiros Militar do Acre
+Inclui: Diplomas, Medalhas, Certificados, Convites, Notas de Pesar e Agradecimentos
+
+Desenvolvido para: CBMAC
+Data: 2024
+-->
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Gerador de Certificados CBMAC</title>
+    
+    <!-- Evitar cache do navegador -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+    <!-- Bootstrap CSS local para garantir funcionamento offline -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    
+    <!-- Ícones Bootstrap com fallback para CDN se não encontrar local -->
+    <link href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css'">
+    <style>
+        /* ========================================
+           PALETA DE CORES BASEADA NO BRASÃO CBMAC
+           Última atualização: 14/10/2025 - Versão 1.1
+           ======================================== */
+        :root{
+            --primary: #ff0000;   /* Vermelho institucional */
+            --accent: #d4af37;    /* Dourado dos detalhes */
+            --neutral: #f7f9fb;   /* Fundo neutro claro */
+            --card-bg: #ffffff;   /* Fundo dos cards */
+            --muted: #6c757d;     /* Texto secundário */
+        }
+
+        /* Layout básico da página */
+        html,body{height:100%;}
+        body {
+            background: var(--neutral);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        /* Centralização vertical e horizontal do formulário */
+        .page-center{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:2rem;
+        }
+
+        /* Card principal do formulário com identidade visual CBMAC */
+        .form-card{
+            width:100%;
+            max-width:900px;
+            position:relative; /* Para posicionar marca d'água */
+            border:3px solid var(--primary);
+            border-radius:12px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.995));
+            box-shadow:0 6px 18px rgba(11,61,145,0.08);
+            overflow:hidden;
+        }
+
+        .form-card .card-body{ position:relative; z-index:2; }
+
+        /* Watermark using brasao.png */
+        .form-card::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background-image: url('{{ url_for("static", filename="brasao.png") }}');
+            background-repeat:no-repeat;
+            background-position:center 35%;
+            background-size: 36%;
+            opacity:0.08;
+            pointer-events:none;
+            z-index:1;
+        }
+
+        .card-title i{ color:var(--primary); }
+        
+        /* Estilização personalizada do botão principal */
+        .btn-primary{ 
+            background:var(--primary); 
+            border-color:#000000 !important;
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover{ 
+            background: #cc0000 !important; 
+            border-color: #000000 !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(204, 0, 0, 0.3);
+        }
+        
+        /* Remover efeito azul ao clicar/focar no botão */
+        .btn-primary:focus,
+        .btn-primary:active,
+        .btn-primary:active:focus,
+        .btn-primary.active {
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25) !important;
+            outline: none !important;
+        }
+        
+        /* Indicadores visuais para campos obrigatórios */
+        .campo-obrigatorio {
+            position: relative;
+        }
+        
+        .campo-obrigatorio::after {
+            content: " *";
+            color: red;
+            font-weight: bold;
+        }
+        
+        .campo-obrigatorio input,
+        .campo-obrigatorio select,
+        .campo-obrigatorio textarea {
+            border-left: 3px solid #ff6b6b !important;
+        }
+        
+        .campo-obrigatorio.preenchido input,
+        .campo-obrigatorio.preenchido select,
+        .campo-obrigatorio.preenchido textarea {
+            border-left: 3px solid #51cf66 !important;
+        }
+        
+        .campo-faltando {
+            animation: pulse-red 1s ease-in-out;
+            background-color: rgba(255, 107, 107, 0.1) !important;
+        }
+        
+        @keyframes pulse-red {
+            0% { background-color: rgba(255, 107, 107, 0.3); }
+            50% { background-color: rgba(255, 107, 107, 0.1); }
+            100% { background-color: rgba(255, 107, 107, 0.05); }
+        }
+
+        .required::after { content: " *"; color: #d00; }
+        @media(max-width:576px){ .form-card{ border-width:2px; } }
+        
+        /* Estilos da Seção de Visualização */
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .document-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .document-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .document-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+        
+        .loading.show {
+            display: flex !important;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        #secao-visualizacao {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="form-card shadow-sm card">
+                        <div class="card-body">
+                        <h3 class="card-title mb-3"><i class="bi bi-file-earmark-text"></i> Gerador de Certificados</h3>
+                        <p class="text-muted">Preencha os campos abaixo e gere o PDF. Arquivos gerados são sobrescritos com o mesmo nome por tipo.</p>
+
+                        <form id="gerador-form" method="POST" action="/gerar-documento-visualizacao">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="tipo" class="form-label required">Tipo de documento</label>
+                                    <select class="form-select" id="tipo" name="tipo" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="Diplomas">Diplomas</option>
+                                        <option value="Medalhas">Medalhas</option>
+                                        <option value="Moeda">Moeda CBMAC</option>
+                                        <option value="Certificado">Certificado Amigo dos Veteranos</option>
+                                        <option value="Agradecimento">Agradecimento</option>
+                                        <option value="Convite">Convite</option>
+                                        <option value="Nota de Pesar">Nota de Pesar</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6" id="subtipo-col" style="display:none;">
+                                    <label for="subtipo" class="form-label">Subtipo</label>
+                                    <select class="form-select" id="subtipo" name="subtipo">
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6" id="subsubtipo-col" style="display:none;">
+                                    <label for="subsubtipo" class="form-label">Detalhe</label>
+                                    <select class="form-select" id="subsubtipo" name="subsubtipo">
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+
+                                <!-- Campos para Diplomas -->
+                                <div id="campos-diploma" style="display:none;">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                <i class="bi bi-person-plus"></i> Modo de Geração
+                                            </label>
+                                            <div class="mb-3">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_diploma" id="individual_diploma" value="individual" checked>
+                                                    <label class="form-check-label" for="individual_diploma">
+                                                        <i class="bi bi-person"></i> Individual
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_diploma" id="lista_diploma" value="lista">
+                                                    <label class="form-check-label" for="lista_diploma">
+                                                        <i class="bi bi-people"></i> Lista (múltiplas páginas em um PDF)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12" id="campo_nome_diploma">
+                                            <label class="form-label" for="nome_diploma">
+                                                <span id="label_nome_diploma">Nome da Pessoa Agraciada</span>
+                                            </label>
+                                            <input class="form-control" type="text" id="nome_diploma" name="nome_diploma" placeholder="Digite o nome da pessoa">
+                                            <textarea class="form-control" id="nome_diploma_lista" name="nome_diploma_lista" rows="3" style="display:none;"
+                                                placeholder="Digite múltiplos nomes separados por vírgula, ponto e vírgula ou quebra de linha.
+Exemplo:
+João Silva
+Maria Santos, Pedro Costa
+Ana Souza; Carlos Lima"></textarea>
+                                            <div class="form-text" id="help_nome_diploma">
+                                                <i class="bi bi-info-circle"></i> 
+                                                <span id="text_help_diploma">Digite o nome da pessoa que receberá o diploma.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="decreto_diploma">Decreto</label>
+                                            <input class="form-control" type="text" id="decreto_diploma" name="decreto_diploma">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_diploma">Local</label>
+                                            <input class="form-control" type="text" id="local_diploma" name="local_diploma">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="data_diploma">Data</label>
+                                            <input class="form-control" type="date" id="data_diploma" name="data_diploma">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="comandante_diploma">Nome do Comandante Geral</label>
+                                            <input class="form-control" type="text" id="comandante_diploma" name="comandante_diploma">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campos para Medalhas -->
+                                <div id="campos-medalha" style="display:none;">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                <i class="bi bi-person-plus"></i> Modo de Geração
+                                            </label>
+                                            <div class="mb-3">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_medalha" id="individual_medalha" value="individual" checked>
+                                                    <label class="form-check-label" for="individual_medalha">
+                                                        <i class="bi bi-person"></i> Individual
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_medalha" id="lista_medalha" value="lista">
+                                                    <label class="form-check-label" for="lista_medalha">
+                                                        <i class="bi bi-people"></i> Lista (múltiplas páginas em um PDF)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12" id="campo_nome_medalha">
+                                            <label class="form-label" for="nome_medalha">
+                                                <span id="label_nome_medalha">Nome da Pessoa Agraciada</span>
+                                            </label>
+                                            <input class="form-control" type="text" id="nome_medalha" name="nome_medalha" placeholder="Digite o nome da pessoa">
+                                            <textarea class="form-control" id="nome_medalha_lista" name="nome_medalha_lista" rows="3" style="display:none;"
+                                                placeholder="Digite múltiplos nomes separados por vírgula, ponto e vírgula ou quebra de linha."></textarea>
+                                            <div class="form-text" id="help_nome_medalha">
+                                                <i class="bi bi-info-circle"></i> 
+                                                <span id="text_help_medalha">Digite o nome da pessoa que receberá a medalha.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="decreto_medalha">Decreto</label>
+                                            <input class="form-control" type="text" id="decreto_medalha" name="decreto_medalha">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_medalha">Local</label>
+                                            <input class="form-control" type="text" id="local_medalha" name="local_medalha">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="data_medalha">Data</label>
+                                            <input class="form-control" type="date" id="data_medalha" name="data_medalha">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="comandante_medalha">Nome do Comandante Geral</label>
+                                            <input class="form-control" type="text" id="comandante_medalha" name="comandante_medalha">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campos para Moeda CBMAC -->
+                                <div id="campos-moeda" style="display:none;">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                <i class="bi bi-person-plus"></i> Modo de Geração
+                                            </label>
+                                            <div class="mb-3">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_moeda" id="individual_moeda" value="individual" checked>
+                                                    <label class="form-check-label" for="individual_moeda">
+                                                        <i class="bi bi-person"></i> Individual
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_moeda" id="lista_moeda" value="lista">
+                                                    <label class="form-check-label" for="lista_moeda">
+                                                        <i class="bi bi-people"></i> Lista (múltiplas páginas em um PDF)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12" id="campo_nome_moeda">
+                                            <label class="form-label" for="nome_moeda">
+                                                <span id="label_nome_moeda">Nome da Pessoa Agraciada</span>
+                                            </label>
+                                            <input class="form-control" type="text" id="nome_moeda" name="nome_moeda" placeholder="Digite o nome da pessoa">
+                                            <textarea class="form-control" id="nome_moeda_lista" name="nome_moeda_lista" rows="3" style="display:none;"
+                                                placeholder="Digite múltiplos nomes separados por vírgula, ponto e vírgula ou quebra de linha."></textarea>
+                                            <div class="form-text" id="help_nome_moeda">
+                                                <i class="bi bi-info-circle"></i> 
+                                                <span id="text_help_moeda">Digite o nome da pessoa que receberá a moeda.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="decreto_moeda">Decreto</label>
+                                            <input class="form-control" type="text" id="decreto_moeda" name="decreto_moeda">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_moeda">Local</label>
+                                            <input class="form-control" type="text" id="local_moeda" name="local_moeda">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="data_moeda">Data</label>
+                                            <input class="form-control" type="date" id="data_moeda" name="data_moeda">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="comandante_moeda">Nome do Comandante Geral</label>
+                                            <input class="form-control" type="text" id="comandante_moeda" name="comandante_moeda">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campos para Certificado Amigo dos Veteranos -->
+                                <div id="campos-certificado" style="display:none;">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                <i class="bi bi-person-plus"></i> Modo de Geração
+                                            </label>
+                                            <div class="mb-3">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_certificado" id="individual_certificado" value="individual" checked>
+                                                    <label class="form-check-label" for="individual_certificado">
+                                                        <i class="bi bi-person"></i> Individual
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="modo_certificado" id="lista_certificado" value="lista">
+                                                    <label class="form-check-label" for="lista_certificado">
+                                                        <i class="bi bi-people"></i> Lista (múltiplas páginas em um PDF)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12" id="campo_nome_certificado">
+                                            <label class="form-label" for="nome_certificado">
+                                                <span id="label_nome_certificado">Nome da Pessoa Agraciada</span>
+                                            </label>
+                                            <input class="form-control" type="text" id="nome_certificado" name="nome_certificado" placeholder="Digite o nome da pessoa">
+                                            <textarea class="form-control" id="nome_certificado_lista" name="nome_certificado_lista" rows="3" style="display:none;"
+                                                placeholder="Digite múltiplos nomes separados por vírgula, ponto e vírgula ou quebra de linha."></textarea>
+                                            <div class="form-text" id="help_nome_certificado">
+                                                <i class="bi bi-info-circle"></i> 
+                                                <span id="text_help_certificado">Digite o nome da pessoa que receberá o certificado.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="decreto_certificado">Decreto</label>
+                                            <input class="form-control" type="text" id="decreto_certificado" name="decreto_certificado">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_certificado">Local</label>
+                                            <input class="form-control" type="text" id="local_certificado" name="local_certificado">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="data_certificado">Data</label>
+                                            <input class="form-control" type="date" id="data_certificado" name="data_certificado">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="comandante_certificado">Nome do Comandante Geral</label>
+                                            <input class="form-control" type="text" id="comandante_certificado" name="comandante_certificado">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campos para Agradecimento -->
+                                <div id="campos-agradecimento" style="display:none;">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="nome_agradecido_agradecimento">Nome do Agradecido</label>
+                                            <input class="form-control" type="text" id="nome_agradecido_agradecimento" name="nome_agradecido_agradecimento">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="funcao_agradecimento">Função</label>
+                                            <input class="form-control" type="text" id="funcao_agradecimento" name="funcao_agradecimento">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_funcao_agradecimento">Local da Função</label>
+                                            <input class="form-control" type="text" id="local_funcao_agradecimento" name="local_funcao_agradecimento">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="pelo_que_agradecimento">Pelo que</label>
+                                            <input class="form-control" type="text" id="pelo_que_agradecimento" name="pelo_que_agradecimento">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="tema_agradecimento">Tema</label>
+                                            <input class="form-control" type="text" id="tema_agradecimento" name="tema_agradecimento">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_agradecimento">Local</label>
+                                            <input class="form-control" type="text" id="local_agradecimento" name="local_agradecimento">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="data_agradecimento">Data</label>
+                                            <input class="form-control" type="date" id="data_agradecimento" name="data_agradecimento">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="comandante_agradecimento">Nome do Comandante Geral</label>
+                                            <input class="form-control" type="text" id="comandante_agradecimento" name="comandante_agradecimento">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campos para Convite -->
+                                <div id="campos-convite" style="display:none;">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="cargo_convidado_convite">Cargo do Convidado</label>
+                                            <input class="form-control" type="text" id="cargo_convidado_convite" name="cargo_convidado_convite">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="nome_convidado_convite">Nome do Convidado</label>
+                                            <input class="form-control" type="text" id="nome_convidado_convite" name="nome_convidado_convite">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="pra_que_convidado_convite">Pra que foi convidado</label>
+                                            <input class="form-control" type="text" id="pra_que_convidado_convite" name="pra_que_convidado_convite">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label" for="data_convite">Data</label>
+                                            <input class="form-control" type="date" id="data_convite" name="data_convite">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label" for="horario_convite">Horário</label>
+                                            <input class="form-control" type="time" id="horario_convite" name="horario_convite">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_convite">Local</label>
+                                            <input class="form-control" type="text" id="local_convite" name="local_convite">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="cidade_convite">Cidade</label>
+                                            <input class="form-control" type="text" id="cidade_convite" name="cidade_convite">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="endereco_convite">Endereço</label>
+                                            <input class="form-control" type="text" id="endereco_convite" name="endereco_convite">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="posto_convite">Posto</label>
+                                            <input class="form-control" type="text" id="posto_convite" name="posto_convite">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="comandante_convite">Nome do Comandante Geral</label>
+                                            <input class="form-control" type="text" id="comandante_convite" name="comandante_convite">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campos para Nota de Pesar -->
+                                <div id="campos-nota-pesar" style="display:none;">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="falecido_nota_pesar">Falecido</label>
+                                            <input class="form-control" type="text" id="falecido_nota_pesar" name="falecido_nota_pesar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="parentesco_nota_pesar">Parentesco</label>
+                                            <input class="form-control" type="text" id="parentesco_nota_pesar" name="parentesco_nota_pesar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="pessoa_enlutada_nota_pesar">Pessoa Enlutada</label>
+                                            <input class="form-control" type="text" id="pessoa_enlutada_nota_pesar" name="pessoa_enlutada_nota_pesar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="local_nota_pesar">Local</label>
+                                            <input class="form-control" type="text" id="local_nota_pesar" name="local_nota_pesar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="data_nota_pesar">Data</label>
+                                            <input class="form-control" type="date" id="data_nota_pesar" name="data_nota_pesar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="comandante_nota_pesar">Nome do Comandante Geral</label>
+                                            <input class="form-control" type="text" id="comandante_nota_pesar" name="comandante_nota_pesar">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-12 mt-4 text-end">
+                                    <button type="button" id="submit-btn" class="btn btn-primary">Gerar Documento</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de Visualização (oculta inicialmente) -->
+    <div id="secao-visualizacao" class="container-fluid py-4" style="display: none; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+        <div class="container">
+            <div class="row">
+                <!-- Resumo -->
+                <div class="col-md-4 mb-4">
+                    <div class="card summary-card fade-in">
+                        <div class="card-body text-center">
+                            <i class="fas fa-check-circle fa-3x mb-3"></i>
+                            <h3 id="total-docs">0</h3>
+                            <p class="mb-2" id="texto-documentos">Documentos Gerados</p>
+                            <small class="opacity-75">
+                                <i class="fas fa-certificate me-1"></i>
+                                <span id="tipo-documento-exibido"></span>
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Ações Principais -->
+                    <div class="card fade-in">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-download me-2"></i>
+                                Downloads
+                            </h5>
+                            
+                            <div id="acoes-documento-unico" style="display: none;">
+                                <button class="btn btn-primary w-100 mb-2" onclick="visualizarPDFUnico()">
+                                    <i class="fas fa-eye me-2"></i>
+                                    Visualizar PDF
+                                </button>
+                                <button class="btn btn-success w-100 mb-3" onclick="downloadDocumentoUnico()">
+                                    <i class="fas fa-download me-2"></i>
+                                    Download Documento
+                                </button>
+                            </div>
+                            
+                            <div id="acoes-multiplos-documentos" style="display: none;">
+                                <button class="btn btn-success w-100 mb-3" onclick="downloadTodosDocumentos()">
+                                    <i class="fas fa-file-archive me-2"></i>
+                                    Download Todos (ZIP)
+                                </button>
+                            </div>
+                            
+                            <button class="btn btn-outline-secondary w-100" onclick="gerarNovosDocumentos()">
+                                <i class="fas fa-plus me-2"></i>
+                                Gerar Novos Documentos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Documentos -->
+                <div class="col-md-8 mb-4">
+                    <div class="card fade-in">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-list me-2"></i>
+                                <span id="titulo-lista-documentos">Documentos Gerados</span>
+                            </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="lista-documentos" class="document-list p-3">
+                                <!-- Lista será preenchida dinamicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.7); z-index: 9999; display: none !important;">
+        <div class="text-center text-white">
+            <div class="spinner-border mb-3" role="status"></div>
+            <p>Preparando download...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS via CDN para componentes interativos -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /*
+        ============================================================
+        CONFIGURAÇÃO DOS TIPOS E SUBTIPOS DE DOCUMENTOS
+        ============================================================
+        
+        Esta configuração define quais subtipos estão disponíveis 
+        para cada tipo de documento. Os dados são baseados na 
+        estrutura de pastas do sistema de arquivos.
+        */
+        
+        // Tipos principais e seus respectivos subtipos
+        const tipos = {
+            'Diplomas': [
+                'Bravura Bombeiro Militar',
+                'Ordem do Mérito Dom Pedro II, no grau Cavaleiro',
+                'Ordem do Mérito Dom Pedro II, no grau Comendador',
+                'Ordem do Mérito Dom Pedro II, no grau Grã-Oficial'
+            ],
+            'Medalhas': [
+                'Amigo',
+                'Bombeiro Durão',
+                'Bombeiro Militar Guardião da Floresta Amazônica',
+                'Comando Coragem e Abnegação',
+                'Comportamento Exemplar Madre Tereza de Calcutá',
+                'Defesa Civil – Vale do Acre',
+                'Ensino e Instrução',
+                'Honra Capacete Bombeiro Militar',
+                'Honra Machadinha Simbólica',
+                'Mérito Administrativo',
+                'Mérito Desportivo Militar',
+                'Mérito Intelectual',
+                'Mérito Intelectual Bronze',
+                'Mérito Mulher Acreana',
+                'Reservista',
+                'Tempo de Serviço'
+            ]
+        };
+
+        // Subtipos aninhados (terceiro nível) - usado para medalhas de tempo de serviço
+        const nested = {
+            'Medalhas': {
+                'Tempo de Serviço': [
+                    '10 ANOS de serviço',
+                    '20 ANOS de serviço',
+                    '30 ANOS de serviço'
+                ]
+            }
+        };
+
+        /*
+        ============================================================
+        ELEMENTOS DOM E FUNÇÕES DE CONTROLE DA INTERFACE
+        ============================================================
+        */
+        
+        // Referências aos elementos principais do formulário
+        const tipoEl = document.getElementById('tipo');
+        const subtipoCol = document.getElementById('subtipo-col');
+        const subtipoEl = document.getElementById('subtipo');
+        const subsubCol = document.getElementById('subsubtipo-col');
+        const subsubEl = document.getElementById('subsubtipo');
+
+        // Configurar controles de modo (individual vs lista)
+        function configurarModoControles() {
+            const tipos = ['diploma', 'medalha', 'moeda', 'certificado'];
+            
+            tipos.forEach(tipo => {
+                const radioIndividual = document.getElementById(`individual_${tipo}`);
+                const radioLista = document.getElementById(`lista_${tipo}`);
+                const inputIndividual = document.getElementById(`nome_${tipo}`);
+                const textareaLista = document.getElementById(`nome_${tipo}_lista`);
+                const labelNome = document.getElementById(`label_nome_${tipo}`);
+                const textHelp = document.getElementById(`text_help_${tipo}`);
+                
+                if (radioIndividual && radioLista) {
+                    function alternarModo() {
+                        const isLista = radioLista.checked;
+                        
+                        if (inputIndividual && textareaLista && labelNome && textHelp) {
+                            if (isLista) {
+                                // Modo Lista
+                                inputIndividual.style.display = 'none';
+                                textareaLista.style.display = 'block';
+                                labelNome.textContent = `Nomes das Pessoas Agraciadas (Lista)`;
+                                textHelp.textContent = `Digite múltiplos nomes. Será gerado um único PDF com uma página para cada pessoa.`;
+                                textareaLista.required = inputIndividual.required;
+                                inputIndividual.required = false;
+                            } else {
+                                // Modo Individual
+                                inputIndividual.style.display = 'block';
+                                textareaLista.style.display = 'none';
+                                labelNome.textContent = `Nome da Pessoa Agraciada`;
+                                textHelp.textContent = `Digite o nome da pessoa que receberá o ${tipo === 'diploma' ? 'diploma' : 
+                                                                                          tipo === 'medalha' ? 'medalha' : 
+                                                                                          tipo === 'moeda' ? 'moeda' : 'certificado'}.`;
+                                inputIndividual.required = textareaLista.required;
+                                textareaLista.required = false;
+                            }
+                        }
+                    }
+                    
+                    radioIndividual.addEventListener('change', alternarModo);
+                    radioLista.addEventListener('change', alternarModo);
+                    
+                    // Configurar estado inicial
+                    alternarModo();
+                }
+            });
+        }
+        
+        // Chamar configuração após DOM carregar
+        document.addEventListener('DOMContentLoaded', configurarModoControles);
+
+        /**
+         * Limpa e oculta o campo de subtipo
+         */
+        function resetSubtipo() {
+            subtipoEl.innerHTML = '<option value="">Selecione...</option>';
+            subtipoCol.style.display = 'none';
+            resetSubsubtipo();
+        }
+
+        /**
+         * Limpa e oculta o campo de sub-subtipo (terceiro nível)
+         */
+        function resetSubsubtipo() {
+            subsubEl.innerHTML = '<option value="">Selecione...</option>';
+            subsubCol.style.display = 'none';
+        }
+
+        /**
+         * Manipula a mudança do tipo de documento principal
+         * - Oculta todos os campos específicos
+         * - Mostra campos relevantes para o tipo selecionado
+         * - Popula opções de subtipo se disponíveis
+         */
+        function handleTipoChange() {
+            const tipo = tipoEl.value;
+            console.log('Tipo selecionado:', tipo, 'Elemento:', tipoEl);
+            console.log('selectedIndex:', tipoEl.selectedIndex, 'options length:', tipoEl.options.length);
+            
+            // Ocultar todos os grupos de campos específicos
+            document.getElementById('campos-diploma').style.display = 'none';
+            document.getElementById('campos-medalha').style.display = 'none';
+            document.getElementById('campos-moeda').style.display = 'none';
+            document.getElementById('campos-certificado').style.display = 'none';
+            document.getElementById('campos-agradecimento').style.display = 'none';
+            document.getElementById('campos-convite').style.display = 'none';
+            document.getElementById('campos-nota-pesar').style.display = 'none';
+
+            if (!tipo) {
+                resetSubtipo();
+                return;
+            }
+
+            // populate subtipo when available
+            if (tipos[tipo]) {
+                subtipoCol.style.display = 'block';
+                subtipoEl.innerHTML = '<option value="">Selecione...</option>';
+                tipos[tipo].forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s;
+                    opt.textContent = s;
+                    subtipoEl.appendChild(opt);
+                });
+            } else {
+                resetSubtipo();
+            }
+
+            // Show campos específicos para cada tipo
+            if (tipo === 'Diplomas') {
+                document.getElementById('campos-diploma').style.display = 'block';
+            } else if (tipo === 'Medalhas') {
+                document.getElementById('campos-medalha').style.display = 'block';
+            } else if (tipo === 'Moeda') {
+                document.getElementById('campos-moeda').style.display = 'block';
+            } else if (tipo === 'Certificado') {
+                document.getElementById('campos-certificado').style.display = 'block';
+            } else if (tipo === 'Agradecimento') {
+                document.getElementById('campos-agradecimento').style.display = 'block';
+            } else if (tipo === 'Convite') {
+                document.getElementById('campos-convite').style.display = 'block';
+            } else if (tipo === 'Nota de Pesar') {
+                document.getElementById('campos-nota-pesar').style.display = 'block';
+            }
+            
+            // Debug: verificar se o valor se mantém após um tempo
+            setTimeout(() => {
+                console.log('Após timeout - valor atual:', tipoEl.value, 'selectedIndex:', tipoEl.selectedIndex);
+                if (tipoEl.value !== tipo) {
+                    console.warn('PROBLEMA: Valor mudou de', tipo, 'para', tipoEl.value);
+                }
+            }, 100);
+            
+            // Apply required fields logic
+            enforceRequiredFields(tipo, '', '');
+        }
+
+        function handleSubtipoChange() {
+            const tipo = tipoEl.value;
+            const st = subtipoEl.value;
+            resetSubsubtipo();
+            if (nested[tipo] && nested[tipo][st]) {
+                subsubCol.style.display = 'block';
+                nested[tipo][st].forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s;
+                    opt.textContent = s;
+                    subsubEl.appendChild(opt);
+                });
+            }
+            // Apply required fields logic
+            enforceRequiredFields(tipo, st, '');
+        }
+
+        // Função para criar campos ocultos
+        function ensureHiddenInputs() {
+            const tipo = tipoEl.value;
+            const st = subtipoEl.value;
+            const sst = subsubEl.value;
+
+            // create hidden inputs for server keys
+            function ensureHidden(name, value) {
+                let el = document.querySelector('input[name="' + name + '"]');
+                if (!el) {
+                    el = document.createElement('input');
+                    el.type = 'hidden';
+                    el.name = name;
+                    document.getElementById('gerador-form').appendChild(el);
+                }
+                el.value = value || '';
+            }
+
+            // Criar campos ocultos para subtipo e subsubtipo
+            ensureHidden('subtipo', st);
+            ensureHidden('subsubtipo', sst);
+        }
+
+        // Enforce required fields depending on tipo/subtipo
+        function setRequired(id, val){
+            const el = document.getElementById(id);
+            if(!el) return;
+            el.required = !!val;
+            // Nunca limpar valores dos dropdowns principais (tipo, subtipo, subsubtipo)
+            const mainSelects = ['tipo', 'subtipo', 'subsubtipo'];
+            if(!val && !mainSelects.includes(id)){ 
+                el.value = ''; 
+            }
+        }
+
+        function enforceRequiredFields(tipo, subtipo, subsub){
+            // PRIMEIRO: Remover indicadores visuais de TODOS os campos possíveis
+            const allFields = [
+                'tipo', 'subtipo', 'subsubtipo',
+                // Campos Diploma
+                'nome_diploma','decreto_diploma','local_diploma','data_diploma','comandante_diploma',
+                // Campos Medalha  
+                'nome_medalha','decreto_medalha','local_medalha','data_medalha','comandante_medalha',
+                // Campos Moeda
+                'nome_moeda','decreto_moeda','local_moeda','data_moeda','comandante_moeda',
+                // Campos Certificado
+                'nome_certificado','decreto_certificado','local_certificado','data_certificado','comandante_certificado',
+                // Campos Agradecimento
+                'nome_agradecido_agradecimento','funcao_agradecimento','local_funcao_agradecimento','pelo_que_agradecimento','tema_agradecimento','local_agradecimento','data_agradecimento','comandante_agradecimento',
+                // Campos Convite
+                'cargo_convidado_convite','nome_convidado_convite','pra_que_convidado_convite','data_convite','horario_convite','local_convite','cidade_convite','endereco_convite','posto_convite','comandante_convite',
+                // Campos Nota de Pesar
+                'falecido_nota_pesar','parentesco_nota_pesar','pessoa_enlutada_nota_pesar','local_nota_pesar','data_nota_pesar','comandante_nota_pesar'
+            ];
+            
+            // Limpar indicadores visuais de todos os campos
+            allFields.forEach(id => {
+                setRequired(id, false);
+                removeVisualIndicator(id);
+            });
+
+            // SEGUNDO: Aplicar indicadores visuais baseado no tipo selecionado
+            if (tipo) {
+                updateVisualIndicators(tipo);
+            }
+            
+            console.log('Indicadores visuais aplicados para tipo:', tipo);
+        }
+
+        // Função para remover indicador visual de campo obrigatório
+        function removeVisualIndicator(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                const container = field.closest('.mb-3') || field.closest('.col-md-6') || field.closest('.col-12');
+                if (container) {
+                    container.classList.remove('campo-obrigatorio', 'preenchido');
+                }
+                field.classList.remove('campo-faltando');
+            }
+        }
+
+        // Função para adicionar indicador visual de campo obrigatório
+        function addVisualIndicator(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                const container = field.closest('.mb-3') || field.closest('.col-md-6') || field.closest('.col-12');
+                if (container) {
+                    container.classList.add('campo-obrigatorio');
+                    // Verificar se o campo já está preenchido
+                    if (field.value.trim() !== '') {
+                        container.classList.add('preenchido');
+                    }
+                }
+            }
+        }
+
+        // Função para atualizar indicadores visuais baseado no tipo de documento
+        function updateVisualIndicators(tipo) {
+            let camposObrigatorios = [];
+            
+            switch(tipo) {
+                case 'Diplomas':
+                    camposObrigatorios = ['nome_diploma', 'decreto_diploma', 'local_diploma', 'data_diploma', 'comandante_diploma'];
+                    break;
+                case 'Medalhas':
+                    camposObrigatorios = ['nome_medalha', 'decreto_medalha', 'local_medalha', 'data_medalha', 'comandante_medalha'];
+                    break;
+                case 'Moeda':
+                    camposObrigatorios = ['nome_moeda', 'decreto_moeda', 'local_moeda', 'data_moeda', 'comandante_moeda'];
+                    break;
+                case 'Certificado':
+                    camposObrigatorios = ['nome_certificado', 'decreto_certificado', 'local_certificado', 'data_certificado', 'comandante_certificado'];
+                    break;
+                case 'Agradecimento':
+                    camposObrigatorios = ['nome_agradecido_agradecimento', 'funcao_agradecimento', 'pelo_que_agradecimento', 'local_agradecimento', 'data_agradecimento', 'comandante_agradecimento'];
+                    break;
+                case 'Convite':
+                    camposObrigatorios = ['nome_convidado_convite', 'pra_que_convidado_convite', 'data_convite', 'horario_convite', 'local_convite', 'comandante_convite'];
+                    break;
+                case 'Nota de Pesar':
+                    camposObrigatorios = ['falecido_nota_pesar', 'parentesco_nota_pesar', 'pessoa_enlutada_nota_pesar', 'local_nota_pesar', 'data_nota_pesar', 'comandante_nota_pesar'];
+                    break;
+            }
+            
+            // Aplicar indicadores visuais aos campos obrigatórios
+            camposObrigatorios.forEach(fieldId => {
+                addVisualIndicator(fieldId);
+            });
+        }
+
+        // Função para monitorar mudanças nos campos e atualizar indicadores
+        function setupFieldMonitoring() {
+            const allInputs = document.querySelectorAll('input, select, textarea');
+            
+            allInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const container = this.closest('.mb-3') || this.closest('.col-md-6') || this.closest('.col-12');
+                    if (container && container.classList.contains('campo-obrigatorio')) {
+                        if (this.value.trim() !== '') {
+                            container.classList.add('preenchido');
+                        } else {
+                            container.classList.remove('preenchido');
+                        }
+                    }
+                    
+                    // Remover animação de campo faltando quando preenchido
+                    if (this.value.trim() !== '') {
+                        this.classList.remove('campo-faltando');
+                    }
+                });
+            });
+        }
+
+        // Attach event listeners
+        tipoEl.addEventListener('change', handleTipoChange);
+        subtipoEl.addEventListener('change', handleSubtipoChange);
+        
+        // Configurar monitoramento de campos após carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFieldMonitoring();
+        });
+    </script>
+
+    <script>
+        // Ensure required attributes only on visible/focusedable controls before submit
+        (function() {
+            const form = document.getElementById('gerador-form');
+            const submitBtn = document.getElementById('submit-btn');
+
+            function removeRequiredFromHidden() {
+                // Simplesmente re-aplicar a lógica de required correta
+                const tipoEl = document.getElementById('tipo');
+                const subtipoEl = document.getElementById('subtipo');  
+                const subsubEl = document.getElementById('subsubtipo');
+                
+                if (tipoEl) {
+                    const tipo = tipoEl.value;
+                    const subtipo = subtipoEl ? subtipoEl.value : '';
+                    const subsub = subsubEl ? subsubEl.value : '';
+                    enforceRequiredFields(tipo, subtipo, subsub);
+                }
+            }
+
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault(); // Impedir submit padrão
+                
+                console.log('=== NOVA FUNCIONALIDADE: Gerar e Visualizar ===');
+                
+                // Get current values with safety checks
+                const tipoEl = document.getElementById('tipo');
+                const subtipoEl = document.getElementById('subtipo');
+                const subsubEl = document.getElementById('subsubtipo');
+                
+                if (!tipoEl) {
+                    console.error('Elemento tipo não encontrado');
+                    return;
+                }
+                
+                const tipo = tipoEl.value;
+                const subtipo = subtipoEl ? subtipoEl.value : '';
+                const subsub = subsubEl ? subsubEl.value : '';
+                
+                console.log('Valores:', {tipo, subtipo, subsub});
+
+                // Validação personalizada: verificar se tipo está selecionado
+                if (!tipo) {
+                    alert('Por favor, selecione o tipo de documento!');
+                    tipoEl.focus();
+                    return;
+                }
+                
+                // Verificar se subtipo é necessário e está selecionado
+                const subtipoVisible = subtipoCol && subtipoCol.style.display !== 'none';
+                if (subtipoVisible && !subtipo) {
+                    alert('Por favor, selecione o subtipo do documento!');
+                    subtipoEl.focus();
+                    return;
+                }
+                
+                // Verificar se sub-subtipo é necessário e está selecionado
+                const subsubVisible = subsubCol && subsubCol.style.display !== 'none';
+                if (subsubVisible && !subsub) {
+                    alert('Por favor, selecione o detalhamento do documento!');
+                    subsubEl.focus();
+                    return;
+                }
+
+                // Validação dos campos específicos de cada tipo de documento
+                let camposObrigatorios = [];
+                let camposFaltando = [];
+                
+                // Definir campos obrigatórios baseado no tipo selecionado
+                switch(tipo) {
+                    case 'Diplomas':
+                        camposObrigatorios = [
+                            {id: 'nome_diploma', nome: 'Nome da Pessoa Agraciada'},
+                            {id: 'decreto_diploma', nome: 'Decreto'},
+                            {id: 'local_diploma', nome: 'Local'},
+                            {id: 'data_diploma', nome: 'Data'},
+                            {id: 'comandante_diploma', nome: 'Nome do Comandante'}
+                        ];
+                        break;
+                    case 'Medalhas':
+                        camposObrigatorios = [
+                            {id: 'nome_medalha', nome: 'Nome da Pessoa Agraciada'},
+                            {id: 'decreto_medalha', nome: 'Decreto'},
+                            {id: 'local_medalha', nome: 'Local'},
+                            {id: 'data_medalha', nome: 'Data'},
+                            {id: 'comandante_medalha', nome: 'Nome do Comandante'}
+                        ];
+                        break;
+                    case 'Moeda':
+                        camposObrigatorios = [
+                            {id: 'nome_moeda', nome: 'Nome da Pessoa Agraciada'},
+                            {id: 'decreto_moeda', nome: 'Decreto'},
+                            {id: 'local_moeda', nome: 'Local'},
+                            {id: 'data_moeda', nome: 'Data'},
+                            {id: 'comandante_moeda', nome: 'Nome do Comandante'}
+                        ];
+                        break;
+                    case 'Certificado':
+                        camposObrigatorios = [
+                            {id: 'nome_certificado', nome: 'Nome da Pessoa Agraciada'},
+                            {id: 'decreto_certificado', nome: 'Decreto'},
+                            {id: 'local_certificado', nome: 'Local'},
+                            {id: 'data_certificado', nome: 'Data'},
+                            {id: 'comandante_certificado', nome: 'Nome do Comandante'}
+                        ];
+                        break;
+                    case 'Agradecimento':
+                        camposObrigatorios = [
+                            {id: 'nome_agradecido_agradecimento', nome: 'Nome do Agradecido'},
+                            {id: 'funcao_agradecimento', nome: 'Função'},
+                            {id: 'pelo_que_agradecimento', nome: 'Pelo que'},
+                            {id: 'local_agradecimento', nome: 'Local'},
+                            {id: 'data_agradecimento', nome: 'Data'},
+                            {id: 'comandante_agradecimento', nome: 'Nome do Comandante'}
+                        ];
+                        break;
+                    case 'Convite':
+                        camposObrigatorios = [
+                            {id: 'nome_convidado_convite', nome: 'Nome do Convidado'},
+                            {id: 'pra_que_convidado_convite', nome: 'Para que foi convidado'},
+                            {id: 'data_convite', nome: 'Data'},
+                            {id: 'horario_convite', nome: 'Horário'},
+                            {id: 'local_convite', nome: 'Local'},
+                            {id: 'comandante_convite', nome: 'Nome do Comandante'}
+                        ];
+                        break;
+                    case 'Nota de Pesar':
+                        camposObrigatorios = [
+                            {id: 'falecido_nota_pesar', nome: 'Nome do Falecido'},
+                            {id: 'parentesco_nota_pesar', nome: 'Parentesco'},
+                            {id: 'pessoa_enlutada_nota_pesar', nome: 'Pessoa Enlutada'},
+                            {id: 'local_nota_pesar', nome: 'Local'},
+                            {id: 'data_nota_pesar', nome: 'Data'},
+                            {id: 'comandante_nota_pesar', nome: 'Nome do Comandante'}
+                        ];
+                        break;
+                }
+                
+                // Primeiro: limpar destaque anterior de campos faltando
+                camposObrigatorios.forEach(campo => {
+                    const elemento = document.getElementById(campo.id);
+                    if (elemento) {
+                        elemento.classList.remove('campo-faltando');
+                    }
+                });
+                
+                // Verificar se todos os campos obrigatórios estão preenchidos
+                camposObrigatorios.forEach(campo => {
+                    const elemento = document.getElementById(campo.id);
+                    if (elemento && elemento.value.trim() === '') {
+                        camposFaltando.push(campo.nome);
+                        // Destacar visualmente o campo faltando
+                        elemento.classList.add('campo-faltando');
+                    }
+                });
+                
+                // Se há campos faltando, mostrar alerta e focar no primeiro
+                if (camposFaltando.length > 0) {
+                    const mensagem = `Os seguintes campos são obrigatórios para ${tipo}:\n\n• ${camposFaltando.join('\n• ')}\n\nPreencha os campos destacados e tente novamente.`;
+                    alert(mensagem);
+                    
+                    // Focar no primeiro campo vazio
+                    const primeiroCampoVazio = camposObrigatorios.find(campo => {
+                        const elemento = document.getElementById(campo.id);
+                        return elemento && elemento.value.trim() === '';
+                    });
+                    
+                    if (primeiroCampoVazio) {
+                        const elemento = document.getElementById(primeiroCampoVazio.id);
+                        elemento.focus();
+                        elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    
+                    return;
+                }
+
+                // Validação passou - agora enviar via AJAX e abrir nova aba
+                gerarDocumentosComVisualizacao();
+            });
+            
+            // Nova função para gerar documentos via AJAX
+            function gerarDocumentosComVisualizacao() {
+                // Mostrar loading
+                submitBtn.innerHTML = '<i class="spinner-border spinner-border-sm me-2"></i>Gerando...';
+                submitBtn.disabled = true;
+                
+                // Preparar dados do formulário
+                const formData = new FormData(form);
+                
+                // Criar campos ocultos se necessário
+                ensureHiddenInputs();
+                
+                console.log('Enviando dados via AJAX...');
+                
+                // Enviar via fetch
+                fetch('/gerar-documento-visualizacao', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => Promise.reject(err));
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Resposta do servidor:', data);
+                    
+                    if (data.success) {
+                        // Mostrar seção de visualização na mesma página
+                        mostrarVisualizacao(data);
+                        
+                        // Rolar para a seção de visualização
+                        document.getElementById('secao-visualizacao').scrollIntoView({ 
+                            behavior: 'smooth' 
+                        });
+                        
+                        // NÃO limpar o formulário - manter os dados preenchidos
+                        console.log('Formulário mantido preenchido para nova geração');
+                        
+                    } else {
+                        alert('Erro: ' + (data.error || 'Erro desconhecido'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao gerar documentos:', error);
+                    alert('Erro ao gerar documentos: ' + (error.error || error.message || 'Erro desconhecido'));
+                })
+                .finally(() => {
+                    // Restaurar botão
+                    submitBtn.innerHTML = '<i class="bi bi-file-earmark-plus"></i> Gerar Documento';
+                    submitBtn.disabled = false;
+                });
+            }
+        })();
+        
+        // Variável global para armazenar dados da sessão atual
+        let sessaoAtual = null;
+        
+        function mostrarVisualizacao(data) {
+            sessaoAtual = data;
+            
+            // Atualizar informações do resumo
+            document.getElementById('total-docs').textContent = data.total_documentos;
+            document.getElementById('tipo-documento-exibido').textContent = data.tipo_documento;
+            
+            const plural = data.total_documentos > 1 ? 's' : '';
+            document.getElementById('texto-documentos').textContent = `Documento${plural} Gerado${plural}`;
+            document.getElementById('titulo-lista-documentos').textContent = 
+                data.total_documentos === 1 ? 'Documento Gerado' : 'Lista de Documentos';
+            
+            // Mostrar ações apropriadas
+            if (data.total_documentos === 1) {
+                document.getElementById('acoes-documento-unico').style.display = 'block';
+                document.getElementById('acoes-multiplos-documentos').style.display = 'none';
+            } else {
+                document.getElementById('acoes-documento-unico').style.display = 'none';
+                document.getElementById('acoes-multiplos-documentos').style.display = 'block';
+            }
+            
+            // Preencher lista de documentos
+            preencherListaDocumentos(data);
+            
+            // Mostrar seção de visualização
+            document.getElementById('secao-visualizacao').style.display = 'block';
+        }
+        
+        function preencherListaDocumentos(data) {
+            const listaContainer = document.getElementById('lista-documentos');
+            listaContainer.innerHTML = '';
+            
+            data.nomes.forEach((nome, index) => {
+                const itemHtml = `
+                    <div class="document-item d-flex align-items-center justify-content-between">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">
+                                <i class="fas fa-user me-2 text-primary"></i>
+                                ${nome}
+                            </h6>
+                            <small class="text-muted">
+                                <i class="fas fa-file-pdf me-1"></i>
+                                ${data.tipo_documento}_${nome.replace(/\s+/g, '_')}.pdf
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success me-2">
+                                <i class="fas fa-check me-1"></i>
+                                Gerado
+                            </span>
+                            ${data.total_documentos > 1 ? `
+                                <button class="btn btn-outline-info btn-sm me-1" onclick="visualizarPDFIndividual(${index})" title="Visualizar PDF">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="downloadIndividual(${index})" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                listaContainer.innerHTML += itemHtml;
+            });
+        }
+        
+        function visualizarPDFUnico() {
+            if (sessaoAtual) {
+                window.open(`/visualizar-pdf-unico/${sessaoAtual.session_id}`, '_blank');
+            }
+        }
+        
+        function visualizarPDFIndividual(index) {
+            if (sessaoAtual) {
+                window.open(`/visualizar-pdf/${sessaoAtual.session_id}/${index}`, '_blank');
+            }
+        }
+        
+        function downloadDocumentoUnico() {
+            if (sessaoAtual) {
+                mostrarLoading(true);
+                window.location.href = `/download/${sessaoAtual.session_id}`;
+                setTimeout(() => mostrarLoading(false), 3000);
+            }
+        }
+        
+        function downloadTodosDocumentos() {
+            if (sessaoAtual) {
+                mostrarLoading(true);
+                window.location.href = `/download/${sessaoAtual.session_id}`;
+                setTimeout(() => mostrarLoading(false), 5000);
+            }
+        }
+        
+        function downloadIndividual(index) {
+            if (sessaoAtual) {
+                mostrarLoading(true);
+                window.location.href = `/download-individual/${sessaoAtual.session_id}/${index}`;
+                setTimeout(() => mostrarLoading(false), 2000);
+            }
+        }
+        
+        function gerarNovosDocumentos() {
+            // Esconder seção de visualização e rolar para o formulário
+            document.getElementById('secao-visualizacao').style.display = 'none';
+            document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
+            sessaoAtual = null;
+        }
+        
+        function mostrarLoading(show) {
+            const loading = document.getElementById('loading-overlay');
+            if (show) {
+                loading.classList.add('show');
+                loading.style.display = 'flex';
+            } else {
+                loading.classList.remove('show');
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

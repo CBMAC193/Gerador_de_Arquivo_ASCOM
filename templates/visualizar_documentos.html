@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos Gerados - CBMAC</title>
+    
+    <!-- Anti-cache headers -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #dc3545;
+            --primary-dark: #cc0000;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tazahomen, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .header-cbmac {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+        }
+        
+        .btn-success {
+            background: #28a745 !important;
+            border-color: #28a745 !important;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover {
+            background: #218838 !important;
+            border-color: #218838 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-outline-secondary {
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-secondary:hover {
+            transform: translateY(-2px);
+        }
+        
+        .document-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .document-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .document-item:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+
+        
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .loading {
+            display: none !important;
+        }
+        
+        .loading.show {
+            display: flex !important;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-cbmac">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-0">
+                        <i class="fas fa-file-pdf me-3"></i>
+                        Documentos Gerados
+                    </h1>
+                    <p class="mb-0 mt-2 opacity-75">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        Corpo de Bombeiros Militar do Acre
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-outline-light" onclick="voltarFormulario()">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Voltar ao Formulário
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Resumo -->
+            <div class="col-md-4 mb-4">
+                <div class="card summary-card fade-in">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-circle fa-3x mb-3"></i>
+                        <h3>{{ session_data.total_documentos }}</h3>
+                        <p class="mb-2">{{ 'Documento Gerado' if session_data.total_documentos == 1 else 'Documentos Gerados' }}</p>
+                        <small class="opacity-75">
+                            <i class="fas fa-certificate me-1"></i>
+                            {{ session_data.tipo_documento }}
+                        </small>
+                    </div>
+                </div>
+                
+                <!-- Ações Principais -->
+                <div class="card fade-in">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-download me-2"></i>
+                            Downloads
+                        </h5>
+                        
+                        {% if session_data.total_documentos == 1 %}
+                            <button class="btn btn-primary w-100 mb-2" onclick="visualizarPDF()">
+                                <i class="fas fa-eye me-2"></i>
+                                Visualizar PDF
+                            </button>
+                            <button class="btn btn-success w-100 mb-3" onclick="downloadDocumento()">
+                                <i class="fas fa-download me-2"></i>
+                                Download Documento
+                            </button>
+                        {% else %}
+                            <button class="btn btn-success w-100 mb-3" onclick="downloadTodos()">
+                                <i class="fas fa-file-archive me-2"></i>
+                                Download Todos (ZIP)
+                            </button>
+                        {% endif %}
+                        
+                        <button class="btn btn-outline-secondary w-100" onclick="voltarFormulario()">
+                            <i class="fas fa-plus me-2"></i>
+                            Gerar Novos Documentos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Documentos -->
+            <div class="col-md-8 mb-4">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2"></i>
+                            {{ 'Documento Gerado' if session_data.total_documentos == 1 else 'Lista de Documentos' }}
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="document-list p-3">
+                            {% for arquivo in session_data.arquivos %}
+                            <div class="document-item d-flex align-items-center justify-content-between">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">
+                                        <i class="fas fa-user me-2 text-primary"></i>
+                                        {{ arquivo.nome_pessoa }}
+                                    </h6>
+                                    <small class="text-muted">
+                                        <i class="fas fa-file-pdf me-1"></i>
+                                        {{ arquivo.nome_arquivo }}
+                                    </small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success me-2">
+                                        <i class="fas fa-check me-1"></i>
+                                        Gerado
+                                    </span>
+                                    {% if session_data.total_documentos > 1 %}
+                                    <button class="btn btn-outline-info btn-sm me-1" onclick="visualizarPDFIndividual({{ loop.index0 }})" title="Visualizar PDF">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="downloadIndividual({{ loop.index0 }})" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Informações Adicionais -->
+                <div class="card fade-in">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Informações
+                        </h6>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>
+                                    Gerado em: {{ moment(session_data.criado_em).format('DD/MM/YYYY HH:mm') if moment else session_data.criado_em[:19].replace('T', ' ') }}
+                                </small>
+                            </div>
+                            <div class="col-sm-6">
+                                <small class="text-muted">
+                                    <i class="fas fa-hashtag me-1"></i>
+                                    Sessão: {{ session_id[:8] }}...
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.7); z-index: 9999;">
+        <div class="text-center text-white">
+            <div class="spinner-border mb-3" role="status"></div>
+            <p>Preparando download...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dados da sessão
+        const sessionId = '{{ session_id }}';
+        const totalDocumentos = {{ session_data.total_documentos|default(0) }};
+        
+        function voltarFormulario() {
+            // Fechar esta aba e voltar para a aba do formulário
+            window.close();
+            
+            // Se não conseguir fechar (bloqueio do navegador), redirecionar
+            setTimeout(() => {
+                if (!window.closed) {
+                    window.location.href = '/';
+                }
+            }, 100);
+        }
+        
+        function downloadDocumento() {
+            showLoading(true);
+            window.location.href = `/download/${sessionId}`;
+            
+            // Esconder loading após um tempo
+            setTimeout(() => {
+                showLoading(false);
+            }, 3000);
+        }
+        
+        function downloadTodos() {
+            showLoading(true);
+            window.location.href = `/download/${sessionId}`;
+            
+            // Esconder loading após um tempo
+            setTimeout(() => {
+                showLoading(false);
+            }, 5000);
+        }
+        
+        function downloadIndividual(index) {
+            showLoading(true);
+            window.location.href = `/download-individual/${sessionId}/${index}`;
+            
+            setTimeout(() => {
+                showLoading(false);
+            }, 2000);
+        }
+        
+        function visualizarPDF() {
+            // Abrir PDF único em nova aba para visualização
+            window.open(`/visualizar-pdf-unico/${sessionId}`, '_blank');
+        }
+        
+        function visualizarPDFIndividual(index) {
+            // Abrir PDF específico em nova aba para visualização
+            window.open(`/visualizar-pdf/${sessionId}/${index}`, '_blank');
+        }
+        
+        function showLoading(show) {
+            const loading = document.querySelector('.loading');
+            if (show) {
+                loading.classList.add('show');
+            } else {
+                loading.classList.remove('show');
+            }
+        }
+        
+        // Animação de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+        
+        // Auto-close em desenvolvimento (remover em produção)
+        {% if config.DEBUG %}
+        console.log('Modo DEBUG: janela não será fechada automaticamente');
+        {% endif %}
+    </script>
+</body>
+</html>

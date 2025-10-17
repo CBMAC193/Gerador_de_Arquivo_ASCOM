@@ -1,0 +1,1606 @@
+2025-10-13 11:42:14,613 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 57, in gerar_certificado
+    caminho_certificado = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 9, in gerar_certificado_medalha
+    reader = PdfReader(modelo_pdf_path)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyPDF2\_reader.py", line 317, in __init__
+    with open(stream, "rb") as fh:
+         ~~~~^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'static/Certificado/Medalha/Medalha.pdf'
+2025-10-13 11:42:14,943 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 11:42:42,924 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 57, in gerar_certificado
+    caminho_certificado = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 9, in gerar_certificado_medalha
+    reader = PdfReader(modelo_pdf_path)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyPDF2\_reader.py", line 317, in __init__
+    with open(stream, "rb") as fh:
+         ~~~~^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'static/Certificado/Medalha/Medalha.pdf'
+2025-10-13 11:42:43,239 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 11:59:20,851 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 57, in gerar_certificado
+    caminho_certificado = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 13, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 12:02:39,716 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:03:55,568 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:04:13,060 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:14:41,035 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:16:02,162 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:19:50,683 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:33:31,276 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    return send_file(caminho_certificado, as_attachment=True)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:34:46,866 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    caminho_certificado = gerar_certificado_medalha(dados)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:35:14,148 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    caminho_certificado = gerar_certificado_medalha(dados)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 12:41:36,922 - ERROR - Exception on /gerar-certificado [POST]
+Traceback (most recent call last):
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Ascom - Certificados\app.py", line 62, in gerar_certificado
+    dados['tipo_documento'] = request.form.get('tipo_documento')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\helpers.py", line 518, in send_file
+    return werkzeug.utils.send_file(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **_prepare_send_file_kwargs(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\CBMAC\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\utils.py", line 439, in send_file
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: Unable to detect the MIME type because a file name is not available. Either set 'download_name', pass a path instead of a file, or set 'mimetype'.
+2025-10-13 13:35:16,125 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 97, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 13, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:36:30,242 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 97, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 21, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:37:26,632 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 97, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 28, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:38:39,976 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 97, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,168 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 14, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:39:56,176 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 14, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:39:56,182 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 14, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:39:56,194 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 14, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:39:56,202 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,217 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,228 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,235 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,246 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,252 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,264 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,270 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,280 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,285 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,295 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,302 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,310 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,317 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,325 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,332 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,341 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:39:56,347 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:00,028 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 14, in gerar_certificado_diploma
+    else:
+        ^
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:41:58,831 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:41:58,838 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:41:58,843 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:41:58,852 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 88, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-13 13:41:58,863 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,874 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,880 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,893 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,900 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,908 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,917 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,925 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,933 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,940 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,947 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,954 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,963 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,969 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,979 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,984 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:58,991 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-13 13:41:59,000 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-14 10:42:52,820 - INFO - Dados recebidos - tipoDocumento: Moeda
+2025-10-14 10:42:52,821 - INFO - Todos os dados do form: {'tipoDocumento': 'Moeda', 'nome': 'João Silva', 'decreto': 'Decreto 123', 'local': 'Rio Branco', 'data': '2025-10-14', 'comandante': 'Coronel Santos', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 10:44:42,674 - INFO - Dados recebidos - tipoDocumento: "Nota de Pesar" (len: 13)
+2025-10-14 10:44:42,675 - INFO - Todos os dados do form: {'tipoDocumento': 'Nota de Pesar', 'falecido': 'João Silva', 'parentesco': 'Pai', 'pessoa_enlutada': 'Maria Silva', 'comandante': 'Coronel Santos', 'local': 'Rio Branco', 'data': '2025-10-14'}
+2025-10-14 10:49:48,530 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 10:49:48,532 - INFO - Todos os dados do form: {'tipoDocumento': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': '', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 10:49:48,532 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 10:49:55,320 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 10:49:55,320 - INFO - Todos os dados do form: {'tipoDocumento': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': '', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 10:49:55,320 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 10:50:07,223 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 10:50:07,224 - INFO - Todos os dados do form: {'tipoDocumento': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': '', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 10:50:07,226 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 10:50:14,006 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 10:50:14,006 - INFO - Todos os dados do form: {'tipoDocumento': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': '', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 10:50:14,007 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 10:51:06,481 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 10:51:06,484 - INFO - Todos os dados do form: {'tipoDocumento': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': '', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 10:51:06,486 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 10:53:54,783 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 10:53:54,784 - INFO - Todos os dados do form: {'tipoDocumento': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': '', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 10:53:54,787 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 11:08:56,403 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 11:08:56,404 - INFO - Todos os dados do form: {'tipoDocumento': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': '', 'subtipoDocumento': '', 'subsubtipoDocumento': ''}
+2025-10-14 11:08:56,405 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 11:18:15,131 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 11:18:15,131 - INFO - Todos os dados do form: {'tipo': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': ''}
+2025-10-14 11:18:15,131 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 11:18:59,123 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 11:18:59,124 - INFO - Todos os dados do form: {'tipo': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': ''}
+2025-10-14 11:18:59,124 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 11:22:13,226 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 11:22:13,226 - INFO - Todos os dados do form: {'tipo': '', 'subtipo': '', 'subsubtipo': '', 'nome': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'nome_agradecido': '', 'funcao': '', 'local_funcao': '', 'pelo_que': '', 'tema': '', 'falecido': '', 'parentesco': '', 'pessoa_enlutada': '', 'cargo_convidado': '', 'nome_convidado': '', 'pra_que_convidado': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto': ''}
+2025-10-14 11:22:13,227 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 13:12:10,088 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 13:12:10,089 - INFO - Todos os dados do form: {'tipo': '', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:12:10,091 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 13:14:07,187 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 13:14:07,187 - INFO - Todos os dados do form: {'tipo': '', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:14:07,188 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 13:14:11,384 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:14:11,384 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:14:22,369 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:14:22,369 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:14:45,484 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:14:45,485 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:14:49,500 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:14:49,501 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:14:55,553 - INFO - Dados recebidos - tipoDocumento: "Nota de Pesar" (len: 13)
+2025-10-14 13:14:55,554 - INFO - Todos os dados do form: {'tipo': 'Nota de Pesar', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:15:06,443 - INFO - Dados recebidos - tipoDocumento: "Nota de Pesar" (len: 13)
+2025-10-14 13:15:06,443 - INFO - Todos os dados do form: {'tipo': 'Nota de Pesar', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:17:28,849 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:17:28,850 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:17:28,851 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-14 13:17:47,525 - INFO - Dados recebidos - tipoDocumento: "Nota de Pesar" (len: 13)
+2025-10-14 13:17:47,526 - INFO - Todos os dados do form: {'tipo': 'Nota de Pesar', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:18:04,677 - INFO - Dados recebidos - tipoDocumento: "Convite" (len: 7)
+2025-10-14 13:18:04,678 - INFO - Todos os dados do form: {'tipo': 'Convite', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:18:09,057 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:18:09,057 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:18:09,058 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-14 13:18:12,745 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:18:12,745 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Ordem do Mérito Dom Pedro II, no grau Cavaleiro', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:18:12,746 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-14 13:18:21,168 - INFO - Dados recebidos - tipoDocumento: "Medalhas" (len: 8)
+2025-10-14 13:18:21,169 - INFO - Todos os dados do form: {'tipo': 'Medalhas', 'subtipo': 'Amigo', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:18:21,169 - INFO - Debug medalha - subtipo: 'None', sub_subtipo: 'None'
+2025-10-14 13:18:21,170 - INFO - Debug medalha - dados: {'nome': '', 'nome_agraciado': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'subtipo': 'Amigo', 'subsubtipo': ''}
+2025-10-14 13:18:21,170 - INFO - Debug: Procurando só Medalhas: None
+2025-10-14 13:18:21,171 - ERROR - Modelo de medalha não encontrado
+2025-10-14 13:18:21,171 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 117, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-14 13:18:26,594 - INFO - Dados recebidos - tipoDocumento: "Medalhas" (len: 8)
+2025-10-14 13:18:26,594 - INFO - Todos os dados do form: {'tipo': 'Medalhas', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '10 ANOS de serviço', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:18:26,595 - INFO - Debug medalha - subtipo: 'None', sub_subtipo: 'None'
+2025-10-14 13:18:26,595 - INFO - Debug medalha - dados: {'nome': '', 'nome_agraciado': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '10 ANOS de serviço'}
+2025-10-14 13:18:26,596 - INFO - Debug: Procurando só Medalhas: None
+2025-10-14 13:18:26,596 - ERROR - Modelo de medalha não encontrado
+2025-10-14 13:18:26,596 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 117, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-14 13:18:47,960 - INFO - Dados recebidos - tipoDocumento: "Medalhas" (len: 8)
+2025-10-14 13:18:47,961 - INFO - Todos os dados do form: {'tipo': 'Medalhas', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '10 ANOS de serviço', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:18:47,961 - INFO - Debug medalha - subtipo: 'None', sub_subtipo: 'None'
+2025-10-14 13:18:47,962 - INFO - Debug medalha - dados: {'nome': '', 'nome_agraciado': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '10 ANOS de serviço'}
+2025-10-14 13:18:47,962 - INFO - Debug: Procurando só Medalhas: None
+2025-10-14 13:18:47,963 - ERROR - Modelo de medalha não encontrado
+2025-10-14 13:18:47,964 - ERROR - Erro ao gerar medalha
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 117, in gerar_certificado
+    caminho = gerar_certificado_medalha(dados)
+  File "C:\Ascom - Certificados\app\models\medalha.py", line 32, in gerar_certificado_medalha
+    raise FileNotFoundError('Modelo de Medalha não encontrado')
+FileNotFoundError: Modelo de Medalha não encontrado
+2025-10-14 13:20:53,853 - INFO - Dados recebidos - tipoDocumento: "Medalhas" (len: 8)
+2025-10-14 13:20:53,854 - INFO - Todos os dados do form: {'tipo': 'Medalhas', 'subtipo': 'Amigo', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:20:53,854 - INFO - Debug medalha - subtipo: 'Amigo', sub_subtipo: ''
+2025-10-14 13:20:53,855 - INFO - Debug medalha - dados: {'nome': '', 'nome_agraciado': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'subtipo': 'Amigo', 'subsubtipo': ''}
+2025-10-14 13:20:53,855 - INFO - Debug: Procurando só com subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Amigo\Amigo.jpg
+2025-10-14 13:20:58,862 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:20:58,863 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Ordem do Mérito Dom Pedro II, no grau Cavaleiro', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:20:58,864 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 99, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 18, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-14 13:21:05,639 - INFO - Dados recebidos - tipoDocumento: "Medalhas" (len: 8)
+2025-10-14 13:21:05,639 - INFO - Todos os dados do form: {'tipo': 'Medalhas', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '10 ANOS de serviço', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:21:05,640 - INFO - Debug medalha - subtipo: 'Tempo de Serviço', sub_subtipo: '10 ANOS de serviço'
+2025-10-14 13:21:05,640 - INFO - Debug medalha - dados: {'nome': '', 'nome_agraciado': '', 'decreto': '', 'local': '', 'data': '', 'comandante': '', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '10 ANOS de serviço'}
+2025-10-14 13:21:05,641 - INFO - Debug: Procurando com subtipo e sub_subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Tempo de Serviço\10 ANOS de serviço.jpg
+2025-10-14 13:21:23,468 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:21:23,469 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:43:08,230 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:43:08,231 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:43:35,130 - INFO - Dados recebidos - tipoDocumento: "" (len: 0)
+2025-10-14 13:43:35,130 - INFO - Todos os dados do form: {'tipo': '', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:43:35,132 - WARNING - tipoDocumento está vazio ou None
+2025-10-14 13:43:39,874 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:43:39,874 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:43:39,878 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 137, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 51, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-14 13:43:44,296 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:43:44,296 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Ordem do Mérito Dom Pedro II, no grau Comendador', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:46:59,526 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:46:59,527 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Ordem do Mérito Dom Pedro II, no grau Comendador', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:47:04,258 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:47:04,259 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Ordem do Mérito Dom Pedro II, no grau Comendador', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:47:08,601 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:47:08,602 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:47:08,603 - ERROR - Erro ao gerar diploma
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 137, in gerar_certificado
+    caminho = gerar_certificado_diploma(dados)
+  File "C:\Ascom - Certificados\app\models\diploma.py", line 51, in gerar_certificado_diploma
+    raise FileNotFoundError('Modelo de Diploma não encontrado')
+FileNotFoundError: Modelo de Diploma não encontrado
+2025-10-14 13:50:50,399 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:50:50,400 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:51:39,835 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:51:39,836 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:51:47,109 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:51:47,109 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 13:51:51,093 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 13:51:51,093 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 14:01:07,003 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 14:01:07,006 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 14:08:06,288 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 14:08:06,288 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 14:08:52,156 - INFO - Dados recebidos - tipoDocumento: "Nota de Pesar" (len: 13)
+2025-10-14 14:08:52,157 - INFO - Todos os dados do form: {'tipo': 'Nota de Pesar', 'subtipo': '', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 14:17:58,418 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 14:17:58,420 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 14:18:51,350 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 14:18:51,351 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 14:19:12,640 - INFO - Dados recebidos - tipoDocumento: "Diplomas" (len: 8)
+2025-10-14 14:19:12,641 - INFO - Todos os dados do form: {'tipo': 'Diplomas', 'subtipo': 'Bravura Bombeiro Militar', 'subsubtipo': '', 'nome_diploma': '', 'decreto_diploma': '', 'local_diploma': '', 'data_diploma': '', 'comandante_diploma': '', 'nome_medalha': '', 'decreto_medalha': '', 'local_medalha': '', 'data_medalha': '', 'comandante_medalha': '', 'nome_moeda': '', 'decreto_moeda': '', 'local_moeda': '', 'data_moeda': '', 'comandante_moeda': '', 'nome_certificado': '', 'decreto_certificado': '', 'local_certificado': '', 'data_certificado': '', 'comandante_certificado': '', 'nome_agradecido_agradecimento': '', 'funcao_agradecimento': '', 'local_funcao_agradecimento': '', 'pelo_que_agradecimento': '', 'tema_agradecimento': '', 'local_agradecimento': '', 'data_agradecimento': '', 'comandante_agradecimento': '', 'cargo_convidado_convite': '', 'nome_convidado_convite': '', 'pra_que_convidado_convite': '', 'data_convite': '', 'horario_convite': '', 'local_convite': '', 'cidade_convite': '', 'endereco_convite': '', 'posto_convite': '', 'comandante_convite': '', 'falecido_nota_pesar': '', 'parentesco_nota_pesar': '', 'pessoa_enlutada_nota_pesar': '', 'local_nota_pesar': '', 'data_nota_pesar': '', 'comandante_nota_pesar': ''}
+2025-10-14 14:47:43,665 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 14:47:43,873 - INFO - Gerados 1 documentos para sessão fa1aa966-4b95-4145-ab79-5605362dd42f
+2025-10-14 14:49:25,333 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 14:49:25,503 - INFO - Gerados 1 documentos para sessão 434cf9eb-6a44-4f37-82b7-6d2138af6747
+2025-10-14 14:49:55,012 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 14:49:55,183 - INFO - Gerados 1 documentos para sessão 3a748f5c-f506-42a9-8fdd-bce65584c896
+2025-10-14 14:50:22,268 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 14:50:22,442 - INFO - Gerados 1 documentos para sessão ff826928-f4c7-4a12-ba26-d77921ed224e
+2025-10-14 14:56:48,499 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 14:56:48,502 - ERROR - Erro ao gerar documentos para visualização
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 402, in gerar_documento_visualizacao
+    if modo == 'lista':
+       ^^^^
+UnboundLocalError: cannot access local variable 'modo' where it is not associated with a value
+2025-10-14 14:57:27,331 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 14:57:27,334 - ERROR - Erro ao gerar documentos para visualização
+Traceback (most recent call last):
+  File "C:\Ascom - Certificados\app.py", line 402, in gerar_documento_visualizacao
+    if modo == 'lista':
+       ^^^^
+UnboundLocalError: cannot access local variable 'modo' where it is not associated with a value
+2025-10-14 14:57:46,786 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 14:57:48,608 - INFO - Gerados 1 documentos para sessão d486f9d6-e391-43a6-8cab-b7af0210f417
+2025-10-14 15:00:38,574 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:00:41,261 - INFO - Gerados 1 documentos para sessão fdb8c275-6c8d-4a16-bdc4-e7b6c2ccaa43
+2025-10-14 15:01:41,426 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:01:43,188 - INFO - Gerados 1 documentos para sessão 170bda46-8010-4642-b72d-c35500c1b6aa
+2025-10-14 15:02:01,841 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:02:02,027 - INFO - Gerados 1 documentos para sessão 1d0a34cd-d222-4691-9f82-1540bc684bf8
+2025-10-14 15:02:13,385 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:02:14,190 - INFO - PDF com múltiplas páginas criado: C:\Ascom - Certificados\uploads\diplomas_20251014_150214.pdf
+2025-10-14 15:02:14,193 - INFO - Gerados 1 documentos para sessão d04d7cfc-c557-42d4-8c6b-af26eabd9cf6
+2025-10-14 15:03:43,490 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:03:44,246 - INFO - PDF com múltiplas páginas criado: C:\Ascom - Certificados\uploads\diplomas_20251014_150344.pdf
+2025-10-14 15:03:44,247 - INFO - Gerados 1 documentos para sessão 55b5bc6c-2c99-4f79-86f5-204a1d29ff23
+2025-10-14 15:06:30,209 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:06:32,113 - INFO - Gerados 1 documentos para sessão dbd9e8e9-0809-4acb-a3e7-6ded5be4539c
+2025-10-14 15:14:48,785 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:15:42,291 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:20:04,896 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:20:18,789 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-14 15:20:48,821 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:21:43,252 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:21:53,075 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:43:39,072 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:44:05,915 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:44:09,855 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:44:19,865 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:44:21,439 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:44:36,916 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:48:47,723 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:48:47,959 - INFO - Gerados 1 documentos para sessão d6b9e905-1fbf-4b3e-bb1b-77f66505f145
+2025-10-15 07:49:29,850 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:49:30,033 - INFO - Gerados 1 documentos para sessão 59f5b266-7439-4a5c-bf05-608989c3e3e1
+2025-10-15 07:49:41,625 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:49:42,619 - INFO - PDF com múltiplas páginas criado: C:\Ascom - Certificados\uploads\diplomas_20251015_074942.pdf
+2025-10-15 07:49:42,620 - INFO - Gerados 1 documentos para sessão 3edf9739-8b16-4f3d-8b57-6bdbff29e33e
+2025-10-15 07:50:00,575 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 07:50:00,577 - INFO - Debug medalha - subtipo: 'Amigo', sub_subtipo: ''
+2025-10-15 07:50:00,578 - INFO - Debug medalha - dados: {'decreto': 'ewew', 'local': 'ewew', 'data': '2025-10-01', 'comandante': 'ewe', 'subtipo': 'Amigo', 'subsubtipo': '', 'nome': 'ewew', 'nome_agraciado': 'ewew'}
+2025-10-15 07:50:00,578 - INFO - Debug: Procurando só com subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Amigo\Amigo.jpg
+2025-10-15 07:50:00,771 - INFO - Gerados 1 documentos para sessão 6fda6658-df7a-4074-a1ff-fbbf7362b40b
+2025-10-15 08:02:46,184 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:02:46,186 - INFO - Debug medalha - subtipo: 'Amigo', sub_subtipo: ''
+2025-10-15 08:02:46,187 - INFO - Debug medalha - dados: {'decreto': 'dfdf', 'local': 'dfdf', 'data': '2025-10-01', 'comandante': 'dfdf', 'subtipo': 'Amigo', 'subsubtipo': '', 'nome': 'fdfdf', 'nome_agraciado': 'fdfdf'}
+2025-10-15 08:02:46,188 - INFO - Debug: Procurando só com subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Amigo\Amigo.jpg
+2025-10-15 08:02:46,433 - INFO - Gerados 1 documentos
+2025-10-15 08:04:00,690 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:04:00,691 - INFO - Debug medalha - subtipo: 'Tempo de Serviço', sub_subtipo: '30 ANOS de serviço'
+2025-10-15 08:04:00,692 - INFO - Debug medalha - dados: {'decreto': 'dfd', 'local': 'fdfd', 'data': '2025-10-15', 'comandante': 'fdfdfd', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '30 ANOS de serviço', 'nome': 'rfdf', 'nome_agraciado': 'rfdf'}
+2025-10-15 08:04:00,692 - INFO - Debug: Procurando com subtipo e sub_subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Tempo de Serviço\30 ANOS de serviço.jpg
+2025-10-15 08:04:00,886 - INFO - Gerados 1 documentos
+2025-10-15 08:08:20,439 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:08:20,582 - INFO - Debug medalha - subtipo: 'Tempo de Serviço', sub_subtipo: '30 ANOS de serviço'
+2025-10-15 08:08:20,582 - INFO - Debug medalha - dados: {'decreto': 'dfdRE', 'local': 'fdfd', 'data': '2025-10-15', 'comandante': 'fdfdfd', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '30 ANOS de serviço', 'nome': 'RERE', 'nome_agraciado': 'RERE'}
+2025-10-15 08:08:20,582 - INFO - Debug: Procurando com subtipo e sub_subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Tempo de Serviço\30 ANOS de serviço.jpg
+2025-10-15 08:08:20,750 - INFO - Debug medalha - subtipo: 'Tempo de Serviço', sub_subtipo: '30 ANOS de serviço'
+2025-10-15 08:08:20,750 - INFO - Debug medalha - dados: {'decreto': 'dfdRE', 'local': 'fdfd', 'data': '2025-10-15', 'comandante': 'fdfdfd', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '30 ANOS de serviço', 'nome': 'ERE', 'nome_agraciado': 'ERE'}
+2025-10-15 08:08:20,751 - INFO - Debug: Procurando com subtipo e sub_subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Tempo de Serviço\30 ANOS de serviço.jpg
+2025-10-15 08:08:20,913 - INFO - Debug medalha - subtipo: 'Tempo de Serviço', sub_subtipo: '30 ANOS de serviço'
+2025-10-15 08:08:20,913 - INFO - Debug medalha - dados: {'decreto': 'dfdRE', 'local': 'fdfd', 'data': '2025-10-15', 'comandante': 'fdfdfd', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '30 ANOS de serviço', 'nome': 'RER', 'nome_agraciado': 'RER'}
+2025-10-15 08:08:20,913 - INFO - Debug: Procurando com subtipo e sub_subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Tempo de Serviço\30 ANOS de serviço.jpg
+2025-10-15 08:08:21,076 - INFO - Debug medalha - subtipo: 'Tempo de Serviço', sub_subtipo: '30 ANOS de serviço'
+2025-10-15 08:08:21,077 - INFO - Debug medalha - dados: {'decreto': 'dfdRE', 'local': 'fdfd', 'data': '2025-10-15', 'comandante': 'fdfdfd', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '30 ANOS de serviço', 'nome': 'ERE', 'nome_agraciado': 'ERE'}
+2025-10-15 08:08:21,077 - INFO - Debug: Procurando com subtipo e sub_subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Tempo de Serviço\30 ANOS de serviço.jpg
+2025-10-15 08:08:21,242 - INFO - Debug medalha - subtipo: 'Tempo de Serviço', sub_subtipo: '30 ANOS de serviço'
+2025-10-15 08:08:21,243 - INFO - Debug medalha - dados: {'decreto': 'dfdRE', 'local': 'fdfd', 'data': '2025-10-15', 'comandante': 'fdfdfd', 'subtipo': 'Tempo de Serviço', 'subsubtipo': '30 ANOS de serviço', 'nome': 'R', 'nome_agraciado': 'R'}
+2025-10-15 08:08:21,244 - INFO - Debug: Procurando com subtipo e sub_subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Tempo de Serviço\30 ANOS de serviço.jpg
+2025-10-15 08:08:21,440 - INFO - PDF com múltiplas páginas criado: C:\Ascom - Certificados\uploads\medalhas_20251015_080821.pdf
+2025-10-15 08:08:21,441 - INFO - Gerados 1 documentos
+2025-10-15 08:09:41,230 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:09:43,091 - INFO - Gerados 1 documentos
+2025-10-15 08:12:25,537 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:12:25,850 - INFO - Gerados 1 documentos
+2025-10-15 08:13:10,549 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:13:10,803 - INFO - Gerados 1 documentos
+2025-10-15 08:13:26,751 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:13:27,047 - INFO - Gerados 1 documentos
+2025-10-15 08:13:40,536 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:13:40,877 - INFO - Gerados 1 documentos
+2025-10-15 08:13:54,193 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:13:54,537 - INFO - Gerados 1 documentos
+2025-10-15 08:14:06,044 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:14:06,275 - INFO - Gerados 1 documentos
+2025-10-15 08:14:15,356 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:14:15,836 - INFO - Gerados 1 documentos
+2025-10-15 08:14:27,461 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:14:27,852 - INFO - Gerados 1 documentos
+2025-10-15 08:15:18,295 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:15:18,602 - INFO - Gerados 1 documentos
+2025-10-15 08:15:34,196 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:15:34,498 - INFO - Gerados 1 documentos
+2025-10-15 08:17:40,168 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:17:40,358 - INFO - Gerados 1 documentos
+2025-10-15 08:18:10,596 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:18:10,838 - INFO - Gerados 1 documentos
+2025-10-15 08:22:33,562 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:22:33,776 - INFO - Gerados 1 documentos
+2025-10-15 08:23:47,770 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:23:47,968 - INFO - Gerados 1 documentos
+2025-10-15 08:26:26,547 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:26:26,754 - INFO - Gerados 1 documentos
+2025-10-15 08:26:32,435 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:26:32,620 - INFO - Gerados 1 documentos
+2025-10-15 08:27:04,788 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:27:06,514 - INFO - Gerados 1 documentos
+2025-10-15 08:30:19,460 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:30:19,636 - INFO - Gerados 1 documentos
+2025-10-15 08:31:18,917 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:31:19,204 - INFO - Gerados 1 documentos
+2025-10-15 08:31:53,058 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:31:53,335 - INFO - Gerados 1 documentos
+2025-10-15 08:32:03,340 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:32:03,341 - INFO - Debug medalha - subtipo: 'Bombeiro Durão', sub_subtipo: ''
+2025-10-15 08:32:03,342 - INFO - Debug medalha - dados: {'decreto': 'sds', 'local': 'dsd', 'data': '2025-10-14', 'comandante': 'sdsd', 'subtipo': 'Bombeiro Durão', 'subsubtipo': '', 'nome': 'sdsd', 'nome_agraciado': 'sdsd'}
+2025-10-15 08:32:03,343 - INFO - Debug: Procurando só com subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Bombeiro Durão\Bombeiro Durão.jpg
+2025-10-15 08:32:03,533 - INFO - Gerados 1 documentos
+2025-10-15 08:33:31,260 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:33:31,454 - INFO - Gerados 1 documentos
+2025-10-15 08:42:19,011 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:42:19,013 - INFO - Debug medalha - subtipo: 'Amigo', sub_subtipo: ''
+2025-10-15 08:42:19,013 - INFO - Debug medalha - dados: {'decreto': 'sd', 'local': 's', 'data': '', 'comandante': '', 'subtipo': 'Amigo', 'subsubtipo': '', 'nome': 'dsd', 'nome_agraciado': 'dsd'}
+2025-10-15 08:42:19,014 - INFO - Debug: Procurando só com subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Amigo\Amigo.jpg
+2025-10-15 08:42:19,195 - INFO - Gerados 1 documentos
+2025-10-15 08:42:36,252 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:42:36,255 - INFO - Debug medalha - subtipo: 'Amigo', sub_subtipo: ''
+2025-10-15 08:42:36,255 - INFO - Debug medalha - dados: {'decreto': 'sd', 'local': 's', 'data': '', 'comandante': '', 'subtipo': 'Amigo', 'subsubtipo': '', 'nome': 'dsd', 'nome_agraciado': 'dsd'}
+2025-10-15 08:42:36,256 - INFO - Debug: Procurando só com subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Amigo\Amigo.jpg
+2025-10-15 08:42:36,482 - INFO - Gerados 1 documentos
+2025-10-15 08:42:42,817 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:42:47,065 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:42:51,912 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:42:55,936 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:43:02,560 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:43:02,690 - INFO - Gerados 1 documentos
+2025-10-15 08:43:11,529 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:43:11,880 - INFO - Gerados 1 documentos
+2025-10-15 08:43:20,353 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:43:23,808 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:43:25,491 - INFO - Gerados 1 documentos
+2025-10-15 08:43:38,296 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:43:44,465 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:43:52,369 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:48:12,346 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:48:47,661 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:49:25,791 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:49:30,902 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:49:39,496 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:49:44,602 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:49:44,750 - INFO - Gerados 1 documentos
+2025-10-15 08:49:55,946 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:49:55,948 - INFO - Debug medalha - subtipo: '', sub_subtipo: ''
+2025-10-15 08:49:55,948 - INFO - Debug medalha - dados: {'decreto': 'ewe', 'local': 'wew', 'data': '2025-10-15', 'comandante': 'ewew', 'subtipo': '', 'subsubtipo': '', 'nome': 'ew', 'nome_agraciado': 'ew'}
+2025-10-15 08:49:55,949 - INFO - Debug: Procurando só Medalhas: None
+2025-10-15 08:49:55,949 - ERROR - Modelo de medalha não encontrado
+2025-10-15 08:49:55,949 - ERROR - Erro ao gerar documento para ew: Modelo de Medalha não encontrado
+2025-10-15 08:49:58,870 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:49:58,871 - INFO - Debug medalha - subtipo: '', sub_subtipo: ''
+2025-10-15 08:49:58,871 - INFO - Debug medalha - dados: {'decreto': 'ewe', 'local': 'wew', 'data': '2025-10-15', 'comandante': 'ewew', 'subtipo': '', 'subsubtipo': '', 'nome': 'ew', 'nome_agraciado': 'ew'}
+2025-10-15 08:49:58,872 - INFO - Debug: Procurando só Medalhas: None
+2025-10-15 08:49:58,872 - ERROR - Modelo de medalha não encontrado
+2025-10-15 08:49:58,872 - ERROR - Erro ao gerar documento para ew: Modelo de Medalha não encontrado
+2025-10-15 08:50:07,842 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:50:07,843 - INFO - Debug medalha - subtipo: 'Comportamento Exemplar Madre Tereza de Calcutá', sub_subtipo: ''
+2025-10-15 08:50:07,844 - INFO - Debug medalha - dados: {'decreto': 'ewe', 'local': 'wew', 'data': '2025-10-15', 'comandante': 'ewew', 'subtipo': 'Comportamento Exemplar Madre Tereza de Calcutá', 'subsubtipo': '', 'nome': 'ew', 'nome_agraciado': 'ew'}
+2025-10-15 08:50:07,844 - INFO - Debug: Procurando só com subtipo: C:\Ascom - Certificados\app\static\Certificado\Medalhas\Comportamento Exemplar Madre Tereza de Calcutá\Comportamento Exemplar Madre Tereza de Calcutá.jpg
+2025-10-15 08:50:08,036 - INFO - Gerados 1 documentos
+2025-10-15 08:50:59,074 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 08:51:10,928 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:08:40,987 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:08:40,989 - INFO - Moeda: usando imagem de modelo em: C:\Ascom - Certificados\app\static\Certificado\Moeda CBMAC\Moeda CBMAC.jpg
+2025-10-15 09:08:41,160 - INFO - Moeda gerada: C:\Ascom - Certificados\uploads\MoedaCBMAC.pdf
+2025-10-15 09:08:41,161 - INFO - Gerados 1 documentos
+2025-10-15 09:11:27,915 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:11:30,127 - INFO - Gerados 1 documentos
+2025-10-15 09:11:33,418 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:11:35,204 - INFO - Gerados 1 documentos
+2025-10-15 09:11:51,451 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:11:53,336 - INFO - Gerados 1 documentos
+2025-10-15 09:12:18,772 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:12:20,712 - INFO - Gerados 1 documentos
+2025-10-15 09:12:36,441 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:12:38,256 - INFO - Gerados 1 documentos
+2025-10-15 09:13:09,457 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:13:11,192 - INFO - Gerados 1 documentos
+2025-10-15 09:13:19,362 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:13:21,111 - INFO - Gerados 1 documentos
+2025-10-15 09:13:27,746 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:13:29,502 - INFO - Gerados 1 documentos
+2025-10-15 09:13:42,374 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:13:44,140 - INFO - Gerados 1 documentos
+2025-10-15 09:14:27,430 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:14:29,258 - INFO - Gerados 1 documentos
+2025-10-15 09:16:11,730 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:16:13,509 - INFO - Gerados 1 documentos
+2025-10-15 09:16:30,188 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:16:32,178 - INFO - Gerados 1 documentos
+2025-10-15 09:16:55,137 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:16:56,847 - INFO - Gerados 1 documentos
+2025-10-15 09:19:13,566 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:19:15,576 - INFO - Gerados 1 documentos
+2025-10-15 09:31:43,543 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:31:46,430 - INFO - Gerados 1 documentos
+2025-10-15 09:57:22,657 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:57:24,506 - INFO - Gerados 1 documentos
+2025-10-15 09:58:05,468 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:58:07,330 - INFO - Gerados 1 documentos
+2025-10-15 09:58:48,114 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:58:50,364 - INFO - Gerados 1 documentos
+2025-10-15 09:59:34,558 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:59:36,587 - INFO - Gerados 1 documentos
+2025-10-15 09:59:49,286 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 09:59:51,271 - INFO - Gerados 1 documentos
+2025-10-15 10:00:32,904 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:00:35,104 - INFO - Gerados 1 documentos
+2025-10-15 10:26:11,607 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:26:13,443 - INFO - Gerados 1 documentos
+2025-10-15 10:26:55,525 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:26:57,392 - INFO - Gerados 1 documentos
+2025-10-15 10:27:34,029 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:27:35,871 - INFO - Gerados 1 documentos
+2025-10-15 10:28:16,820 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:28:18,510 - INFO - Gerados 1 documentos
+2025-10-15 10:28:31,014 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:28:32,865 - INFO - Gerados 1 documentos
+2025-10-15 10:28:40,973 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:28:42,777 - INFO - Gerados 1 documentos
+2025-10-15 10:28:49,550 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:28:51,324 - INFO - Gerados 1 documentos
+2025-10-15 10:29:21,811 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:29:23,514 - INFO - Gerados 1 documentos
+2025-10-15 10:30:07,042 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:30:08,886 - INFO - Gerados 1 documentos
+2025-10-15 10:30:18,276 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:30:20,130 - INFO - Gerados 1 documentos
+2025-10-15 10:30:32,402 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:30:34,143 - INFO - Gerados 1 documentos
+2025-10-15 10:30:51,368 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:30:53,121 - INFO - Gerados 1 documentos
+2025-10-15 10:31:05,225 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:31:07,201 - INFO - Gerados 1 documentos
+2025-10-15 10:31:28,196 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:31:29,962 - INFO - Gerados 1 documentos
+2025-10-15 10:32:17,305 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:32:19,019 - INFO - Gerados 1 documentos
+2025-10-15 10:32:39,589 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:32:41,288 - INFO - Gerados 1 documentos
+2025-10-15 10:33:12,785 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:33:14,663 - INFO - Gerados 1 documentos
+2025-10-15 10:33:23,216 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:33:24,880 - INFO - Gerados 1 documentos
+2025-10-15 10:33:36,530 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:33:38,219 - INFO - Gerados 1 documentos
+2025-10-15 10:33:45,517 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:33:47,333 - INFO - Gerados 1 documentos
+2025-10-15 10:34:15,008 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:34:16,714 - INFO - Gerados 1 documentos
+2025-10-15 10:34:34,968 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:34:36,714 - INFO - Gerados 1 documentos
+2025-10-15 10:34:55,424 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:34:57,128 - INFO - Gerados 1 documentos
+2025-10-15 10:35:19,234 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:35:21,002 - INFO - Gerados 1 documentos
+2025-10-15 10:35:33,617 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:35:35,538 - INFO - Gerados 1 documentos
+2025-10-15 10:35:52,787 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:35:54,520 - INFO - Gerados 1 documentos
+2025-10-15 10:36:04,706 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:36:06,653 - INFO - Gerados 1 documentos
+2025-10-15 10:36:18,075 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:36:19,781 - INFO - Gerados 1 documentos
+2025-10-15 10:37:26,193 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:37:27,881 - INFO - Gerados 1 documentos
+2025-10-15 10:38:42,785 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:38:44,358 - ERROR - Erro ao gerar documento para Ninguem: 
+paragraph text '<para>O Corpo de Bombeiros Militar do Estado do Acre, atrav\xe9s do Comandante-Geral, lamenta o falecimento de Ninguem, AVO do Fulano. A corpora\xe7\xe3o presta suas sinceras condol\xeancias aos familiares e amigos por t\xe3o grande perda.</para>' caused exception error with style name=corpo Can't map determine family/bold/italic for arial
+2025-10-15 10:38:56,721 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:39:11,014 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:39:12,958 - INFO - Gerados 1 documentos
+2025-10-15 10:42:56,299 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:42:58,302 - INFO - Gerados 1 documentos
+2025-10-15 10:44:35,720 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:44:37,742 - INFO - Gerados 1 documentos
+2025-10-15 10:45:09,295 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:45:11,516 - INFO - Gerados 1 documentos
+2025-10-15 10:45:29,215 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:45:31,197 - INFO - Gerados 1 documentos
+2025-10-15 10:47:39,563 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:47:41,473 - INFO - Gerados 1 documentos
+2025-10-15 10:48:12,225 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:48:14,296 - INFO - Gerados 1 documentos
+2025-10-15 10:49:49,438 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:49:51,742 - INFO - Gerados 1 documentos
+2025-10-15 10:50:17,836 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:50:19,768 - INFO - Gerados 1 documentos
+2025-10-15 10:50:49,259 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:50:51,331 - INFO - Gerados 1 documentos
+2025-10-15 10:52:23,156 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:52:25,097 - INFO - Gerados 1 documentos
+2025-10-15 10:52:48,202 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:52:50,147 - INFO - Gerados 1 documentos
+2025-10-15 10:53:07,414 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:53:09,402 - INFO - Gerados 1 documentos
+2025-10-15 10:53:30,869 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:53:32,764 - INFO - Gerados 1 documentos
+2025-10-15 10:54:19,062 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:54:21,142 - INFO - Gerados 1 documentos
+2025-10-15 10:54:47,804 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:54:49,728 - INFO - Gerados 1 documentos
+2025-10-15 10:56:26,152 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:56:28,126 - INFO - Gerados 1 documentos
+2025-10-15 10:56:48,746 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:56:50,829 - INFO - Gerados 1 documentos
+2025-10-15 10:59:44,287 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 10:59:46,801 - INFO - Gerados 1 documentos
+2025-10-15 11:00:01,868 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:00:04,118 - INFO - Gerados 1 documentos
+2025-10-15 11:00:18,963 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:00:21,165 - INFO - Gerados 1 documentos
+2025-10-15 11:00:55,830 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:00:57,751 - INFO - Gerados 1 documentos
+2025-10-15 11:04:05,374 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:04:07,519 - INFO - Gerados 1 documentos
+2025-10-15 11:04:44,260 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:04:46,197 - INFO - Gerados 1 documentos
+2025-10-15 11:09:17,373 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:09:18,107 - INFO - Gerados 1 documentos
+2025-10-15 11:10:47,848 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:10:48,438 - INFO - Gerados 1 documentos
+2025-10-15 11:11:14,677 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:11:15,197 - INFO - Gerados 1 documentos
+2025-10-15 11:23:02,320 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:23:03,168 - INFO - Gerados 1 documentos
+2025-10-15 11:23:42,290 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:23:42,859 - INFO - Gerados 1 documentos
+2025-10-15 11:23:59,575 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:24:00,081 - INFO - Gerados 1 documentos
+2025-10-15 11:24:29,625 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:24:30,328 - INFO - Gerados 1 documentos
+2025-10-15 11:24:43,161 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:24:43,766 - INFO - Gerados 1 documentos
+2025-10-15 11:24:59,014 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:24:59,594 - INFO - Gerados 1 documentos
+2025-10-15 11:25:16,396 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:25:16,904 - INFO - Gerados 1 documentos
+2025-10-15 11:25:30,712 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:25:31,217 - INFO - Gerados 1 documentos
+2025-10-15 11:25:43,288 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:25:43,815 - INFO - Gerados 1 documentos
+2025-10-15 11:26:00,232 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:26:00,812 - INFO - Gerados 1 documentos
+2025-10-15 11:26:20,927 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:26:21,432 - INFO - Gerados 1 documentos
+2025-10-15 11:27:01,595 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:27:02,096 - INFO - Gerados 1 documentos
+2025-10-15 11:27:22,619 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:27:23,128 - INFO - Gerados 1 documentos
+2025-10-15 11:27:34,949 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:27:35,636 - INFO - Gerados 1 documentos
+2025-10-15 11:28:56,096 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:28:56,609 - INFO - Gerados 1 documentos
+2025-10-15 11:29:42,866 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:29:43,356 - INFO - Gerados 1 documentos
+2025-10-15 11:30:32,022 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:30:32,587 - INFO - Gerados 1 documentos
+2025-10-15 11:30:55,749 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:30:56,254 - INFO - Gerados 1 documentos
+2025-10-15 11:35:59,734 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:36:00,424 - INFO - Gerados 1 documentos
+2025-10-15 11:36:47,111 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:36:47,664 - INFO - Gerados 1 documentos
+2025-10-15 11:38:13,286 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:38:13,841 - INFO - Gerados 1 documentos
+2025-10-15 11:41:20,692 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:41:21,502 - INFO - Gerados 1 documentos
+2025-10-15 11:41:44,957 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:41:45,485 - INFO - Gerados 1 documentos
+2025-10-15 11:42:05,943 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:42:06,491 - INFO - Gerados 1 documentos
+2025-10-15 11:43:06,441 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:43:07,063 - INFO - Gerados 1 documentos
+2025-10-15 11:43:21,521 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:43:22,083 - INFO - Gerados 1 documentos
+2025-10-15 11:44:59,569 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:45:00,239 - INFO - Gerados 1 documentos
+2025-10-15 11:45:59,762 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:46:00,684 - INFO - Gerados 1 documentos
+2025-10-15 11:46:33,253 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:46:33,796 - INFO - Gerados 1 documentos
+2025-10-15 11:47:04,868 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:47:05,405 - INFO - Gerados 1 documentos
+2025-10-15 11:49:30,983 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:49:31,496 - INFO - Gerados 1 documentos
+2025-10-15 11:50:30,967 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:50:31,515 - INFO - Gerados 1 documentos
+2025-10-15 11:50:47,702 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:50:48,272 - INFO - Gerados 1 documentos
+2025-10-15 11:51:01,048 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:51:02,126 - INFO - Gerados 1 documentos
+2025-10-15 11:51:31,093 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:51:31,683 - INFO - Gerados 1 documentos
+2025-10-15 11:53:29,011 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:53:29,578 - INFO - Gerados 1 documentos
+2025-10-15 11:54:14,017 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:54:14,746 - INFO - Gerados 1 documentos
+2025-10-15 11:55:11,483 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:55:12,057 - INFO - Gerados 1 documentos
+2025-10-15 11:55:17,985 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:55:18,603 - INFO - Gerados 1 documentos
+2025-10-15 11:55:58,996 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:55:59,878 - INFO - Gerados 1 documentos
+2025-10-15 11:56:29,074 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 11:56:29,727 - INFO - Gerados 1 documentos
+2025-10-15 12:02:58,468 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:02:59,107 - INFO - Gerados 1 documentos
+2025-10-15 12:03:34,429 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:03:35,131 - INFO - Gerados 1 documentos
+2025-10-15 12:04:14,756 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:04:15,309 - INFO - Gerados 1 documentos
+2025-10-15 12:04:31,403 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:04:31,964 - INFO - Gerados 1 documentos
+2025-10-15 12:05:13,922 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:05:14,576 - INFO - Gerados 1 documentos
+2025-10-15 12:06:32,433 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:06:33,118 - INFO - Gerados 1 documentos
+2025-10-15 12:06:52,098 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:06:52,633 - INFO - Gerados 1 documentos
+2025-10-15 12:07:59,191 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:07:59,751 - INFO - Gerados 1 documentos
+2025-10-15 12:08:10,048 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:08:10,566 - INFO - Gerados 1 documentos
+2025-10-15 12:09:08,474 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:09:09,090 - INFO - Gerados 1 documentos
+2025-10-15 12:10:33,490 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:10:34,190 - INFO - Gerados 1 documentos
+2025-10-15 12:11:14,996 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:11:15,594 - INFO - Gerados 1 documentos
+2025-10-15 12:18:19,903 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:18:20,561 - INFO - Gerados 1 documentos
+2025-10-15 12:18:56,594 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:18:57,344 - INFO - Gerados 1 documentos
+2025-10-15 12:23:29,485 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:23:30,254 - INFO - Gerados 1 documentos
+2025-10-15 12:24:08,883 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:24:09,797 - INFO - Gerados 1 documentos
+2025-10-15 12:24:51,060 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:24:51,735 - INFO - Gerados 1 documentos
+2025-10-15 12:25:35,455 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:25:36,435 - INFO - Gerados 1 documentos
+2025-10-15 12:26:08,875 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:26:09,822 - INFO - Gerados 1 documentos
+2025-10-15 12:26:14,377 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:26:14,897 - INFO - Gerados 1 documentos
+2025-10-15 12:26:55,975 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:26:58,865 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:27:05,882 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:27:06,394 - INFO - Gerados 1 documentos
+2025-10-15 12:31:28,271 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:31:28,926 - INFO - Gerados 1 documentos
+2025-10-15 12:32:07,863 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:32:08,415 - INFO - Gerados 1 documentos
+2025-10-15 12:32:14,148 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:32:14,654 - INFO - Gerados 1 documentos
+2025-10-15 12:36:08,652 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:36:11,691 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:36:12,216 - INFO - Gerados 1 documentos
+2025-10-15 12:42:01,602 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:42:02,115 - INFO - Gerados 1 documentos
+2025-10-15 12:42:10,124 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:42:10,801 - INFO - Gerados 1 documentos
+2025-10-15 12:42:39,448 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:42:40,261 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: 'NoneType' object has no attribute 'strip'
+2025-10-15 12:43:04,265 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:43:05,171 - INFO - Gerados 1 documentos
+2025-10-15 12:43:26,425 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:43:27,240 - INFO - Gerados 1 documentos
+2025-10-15 12:44:06,616 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:44:07,161 - INFO - Gerados 1 documentos
+2025-10-15 12:44:43,283 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:44:43,808 - INFO - Gerados 1 documentos
+2025-10-15 12:46:49,313 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:46:50,361 - INFO - Gerados 1 documentos
+2025-10-15 12:49:25,431 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:49:26,578 - INFO - Gerados 1 documentos
+2025-10-15 12:50:48,525 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:50:49,408 - INFO - Gerados 1 documentos
+2025-10-15 12:50:56,807 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:50:57,617 - INFO - Gerados 1 documentos
+2025-10-15 12:53:08,248 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:53:19,293 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:53:20,015 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:54:30,352 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:54:31,001 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:55:08,414 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:55:09,136 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:56:10,430 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:56:11,371 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:56:33,951 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:56:34,725 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:57:32,449 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:57:33,280 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:58:28,600 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:58:29,383 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:58:33,100 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:58:33,645 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 12:59:25,508 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 12:59:26,384 - ERROR - Erro ao gerar documento para EWERTON BEZERRA SILVA: Campos obrigatórios não preenchidos: Endereço, Local, Cidade, Data, Horário
+2025-10-15 13:00:15,796 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 13:00:16,819 - INFO - Gerados 1 documentos
+2025-10-15 13:00:37,338 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 13:00:38,159 - INFO - Gerados 1 documentos
+2025-10-15 13:02:37,727 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 13:02:39,651 - INFO - Gerados 1 documentos
+2025-10-15 13:07:40,385 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-15 13:07:40,927 - INFO - Gerados 1 documentos
+2025-10-16 11:29:37,385 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:29:37,973 - INFO - Gerados 1 documentos
+2025-10-16 11:31:55,155 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:31:55,952 - INFO - Gerados 1 documentos
+2025-10-16 11:32:43,064 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:32:43,608 - INFO - Gerados 1 documentos
+2025-10-16 11:34:06,091 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:34:07,114 - INFO - Gerados 1 documentos
+2025-10-16 11:34:25,844 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:34:26,695 - INFO - Gerados 1 documentos
+2025-10-16 11:34:37,271 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:34:38,047 - INFO - Gerados 1 documentos
+2025-10-16 11:42:13,366 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:42:13,904 - INFO - Gerados 1 documentos
+2025-10-16 11:52:42,232 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 11:52:42,236 - ERROR - Erro ao gerar documento para Sazilhamas: Campos obrigatórios não preenchidos: Nome do Agradecido, Função, Pelo que, Local, Data, Nome do Comandante
+2025-10-16 12:00:09,673 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:00:09,681 - INFO - Gerados 1 documentos
+2025-10-16 12:12:02,170 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:12:02,173 - ERROR - Erro ao gerar documento para Sazilhamas: name 'ImageReader' is not defined
+2025-10-16 12:12:04,318 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:12:04,321 - ERROR - Erro ao gerar documento para Sazilhamas: name 'ImageReader' is not defined
+2025-10-16 12:15:48,203 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:15:48,580 - INFO - Gerados 1 documentos
+2025-10-16 12:30:37,307 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:30:37,609 - INFO - Gerados 1 documentos
+2025-10-16 12:31:20,969 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:31:21,267 - INFO - Gerados 1 documentos
+2025-10-16 12:32:12,065 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:32:12,383 - INFO - Gerados 1 documentos
+2025-10-16 12:32:15,985 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:32:16,335 - INFO - Gerados 1 documentos
+2025-10-16 12:32:27,103 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:32:27,383 - INFO - Gerados 1 documentos
+2025-10-16 12:35:32,177 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:35:32,371 - INFO - Gerados 1 documentos
+2025-10-16 12:35:49,728 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:35:49,884 - INFO - Gerados 1 documentos
+2025-10-16 12:36:06,081 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:36:06,234 - INFO - Gerados 1 documentos
+2025-10-16 12:36:36,302 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:36:36,553 - ERROR - Erro ao gerar documento para Sazilhamas: 
+paragraph text '<para>Agradecemos \xe0 Sazilhamas - Func Cival, CBMAC, pela Pelo excelente trabalho com o tema "nas Fotos".</para>' caused exception error with style name=corpo Can't map determine family/bold/italic for corsiva
+2025-10-16 12:38:21,570 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:38:21,855 - INFO - Gerados 1 documentos
+2025-10-16 12:40:08,737 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:40:09,051 - INFO - Gerados 1 documentos
+2025-10-16 12:47:28,843 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:47:29,226 - INFO - Gerados 1 documentos
+2025-10-16 12:51:21,363 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:51:21,671 - INFO - Gerados 1 documentos
+2025-10-16 12:51:40,332 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:51:40,952 - INFO - Gerados 1 documentos
+2025-10-16 12:51:47,941 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 12:51:48,439 - INFO - Gerados 1 documentos
+2025-10-16 13:04:15,237 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:04:15,544 - ERROR - Erro ao gerar documento para ds: 'Paragraph' object has no attribute 'blPara'
+2025-10-16 13:15:50,466 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:15:50,622 - INFO - Gerados 1 documentos
+2025-10-16 13:18:54,816 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:18:54,996 - INFO - Gerados 1 documentos
+2025-10-16 13:21:55,328 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:21:55,654 - INFO - Gerados 1 documentos
+2025-10-16 13:24:01,945 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:24:02,281 - INFO - Gerados 1 documentos
+2025-10-16 13:26:18,769 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:26:19,130 - INFO - Gerados 1 documentos
+2025-10-16 13:26:58,635 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:26:58,937 - INFO - Gerados 1 documentos
+2025-10-16 13:29:32,810 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:29:33,159 - INFO - Gerados 1 documentos
+2025-10-16 13:31:09,499 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:31:09,836 - INFO - Gerados 1 documentos
+2025-10-16 13:31:56,052 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:31:56,369 - INFO - Gerados 1 documentos
+2025-10-16 13:32:16,251 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:32:16,561 - INFO - Gerados 1 documentos
+2025-10-16 13:32:39,187 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:32:39,515 - INFO - Gerados 1 documentos
+2025-10-16 13:33:21,356 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:33:21,669 - INFO - Gerados 1 documentos
+2025-10-16 13:33:54,851 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:33:55,126 - ERROR - Erro ao gerar documento para Louise Kristina Lopes de Oliveira: bad align 'justify'
+2025-10-16 13:34:35,563 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:34:35,969 - INFO - Gerados 1 documentos
+2025-10-16 13:34:44,322 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:34:44,608 - INFO - Gerados 1 documentos
+2025-10-16 13:35:04,683 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:35:05,008 - INFO - Gerados 1 documentos
+2025-10-16 13:36:32,788 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:36:33,133 - INFO - Gerados 1 documentos
+2025-10-16 13:36:55,401 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:36:55,724 - INFO - Gerados 1 documentos
+2025-10-16 13:37:12,423 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:37:12,737 - INFO - Gerados 1 documentos
+2025-10-16 13:37:24,980 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:37:25,287 - INFO - Gerados 1 documentos
+2025-10-16 13:37:35,409 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:37:35,713 - INFO - Gerados 1 documentos
+2025-10-16 13:38:09,052 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:38:09,387 - INFO - Gerados 1 documentos
+2025-10-16 13:38:59,765 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:39:00,064 - INFO - Gerados 1 documentos
+2025-10-16 13:39:11,422 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:39:11,724 - INFO - Gerados 1 documentos
+2025-10-16 13:39:29,181 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:39:29,475 - INFO - Gerados 1 documentos
+2025-10-16 13:39:46,656 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:39:46,971 - INFO - Gerados 1 documentos
+2025-10-16 13:40:06,449 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:40:06,747 - INFO - Gerados 1 documentos
+2025-10-16 13:40:54,629 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:40:54,947 - INFO - Gerados 1 documentos
+2025-10-16 13:41:58,014 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:41:58,357 - INFO - Gerados 1 documentos
+2025-10-16 13:42:56,071 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:42:56,405 - INFO - Gerados 1 documentos
+2025-10-16 13:43:22,217 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:43:22,543 - INFO - Gerados 1 documentos
+2025-10-16 13:52:07,851 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:52:08,157 - INFO - Gerados 1 documentos
+2025-10-16 13:55:16,260 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:55:16,571 - INFO - Gerados 1 documentos
+2025-10-16 13:56:22,693 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:56:23,139 - INFO - Gerados 1 documentos
+2025-10-16 13:58:22,084 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:58:22,523 - INFO - Gerados 1 documentos
+2025-10-16 13:59:18,267 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:59:18,596 - INFO - Gerados 1 documentos
+2025-10-16 13:59:49,747 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 13:59:50,059 - INFO - Gerados 1 documentos
+2025-10-16 14:00:24,147 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 14:00:24,463 - INFO - Gerados 1 documentos
+2025-10-16 14:01:00,158 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 14:01:00,462 - INFO - Gerados 1 documentos
+2025-10-16 14:01:10,671 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 14:01:11,037 - INFO - Gerados 1 documentos
+2025-10-16 14:01:36,620 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 14:01:36,917 - INFO - Gerados 1 documentos
+2025-10-16 14:02:01,979 - INFO - === GERANDO DOCUMENTO PARA VISUALIZAÇÃO ===
+2025-10-16 14:02:02,277 - INFO - Gerados 1 documentos
