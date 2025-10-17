@@ -154,13 +154,7 @@ def gerar_certificado_medalha(dados: dict) -> str:
         alignment=2,
         textColor=colors.black
     )
-    style_cargo = ParagraphStyle(
-        "cargo_assinatura",
-        fontName=FONTE_ASS_NOME if FONTE_ASS_NOME in pdfmetrics.getRegisteredFontNames() else "Helvetica",
-        fontSize=FONTE_CARGO,
-        leading=FONTE_CARGO + 6,
-        alignment=TA_CENTER,
-    )
+
 
     x = MARGEM_ESQ
     w = pw - MARGEM_ESQ - MARGEM_DIR
@@ -175,20 +169,47 @@ def gerar_certificado_medalha(dados: dict) -> str:
     ]
     frame.addFromList(story, c)
 
-    # Assinatura central
-    c.setFillColor(colors.black)
-    c.setFont(FONTE_ASS_NOME if FONTE_ASS_NOME in pdfmetrics.getRegisteredFontNames() else "Helvetica", FONTE_ASS)
-    c.drawCentredString(450 * mm, 150 + 40, comandante)
-    c.setFont(FONTE_ASS_NOME if FONTE_ASS_NOME in pdfmetrics.getRegisteredFontNames() else "Helvetica", FONTE_CARGO)
-    cargo_html = f"Comandante-Geral e Chanceler do Conselho da {subtipo}"
-    frame_w = 140 * mm  # mais estreito para forçar a quebra automática
-    frame_h = 30 * mm   # altura suficiente para 2 linhas
-    frame_x = 385 * mm
-    frame_y = 65  # ajuste fino vertical (mesma região onde estava o seu texto)
+    # ------ 1) Desenha o NOME da assinatura e guarda o y ------
+    x_centro = 450 * mm
+    y_nome = 150 + 40
+    fonte_nome = FONTE_ASS_NOME if FONTE_ASS_NOME in pdfmetrics.getRegisteredFontNames() else "Helvetica"
+
+    c.setFont(fonte_nome, FONTE_ASS)
+    c.drawCentredString(x_centro, y_nome, comandante)
+
+    # Altura "real" de uma linha dessa fonte, em pontos
+    ascent  = pdfmetrics.getAscent(fonte_nome)    * (FONTE_ASS / 1000.0)
+    descent = abs(pdfmetrics.getDescent(fonte_nome)) * (FONTE_ASS / 1000.0)
+    altura_linha_nome = ascent + descent
+
+    # Espaço desejado entre o nome e o cargo
+    gap = -5 * mm  # ajuste fino aqui (aumente/diminua para colar mais/menos)
+
+    # ------ 2) Monta o PARÁGRAFO do cargo (quebra automática ou com <br/>) ------
+    style_cargo = ParagraphStyle(
+        "cargo_assinatura",
+        fontName=fonte_nome,
+        fontSize=FONTE_CARGO,
+        leading=FONTE_CARGO + 6,
+        alignment=TA_CENTER,
+    )
+
+    cargo_html = f"Comandante-Geral e Chanceler do Conselho da {subtipo}"  # ou com <br/>
+
+    # largura que força a quebra; ajuste se quiser 1/2/3 linhas
+    frame_w = 160 * mm
 
     p = Paragraph(cargo_html, style_cargo)
-    w, h = p.wrap(frame_w, frame_h)  # calcula quebra
-    p.drawOn(c, frame_x, frame_y)    # desenha centralizado dentro da área
+    w, h = p.wrap(frame_w, 100 * mm)  # calcula a altura necessária para o cargo
+
+    # y do CARGO: imediatamente abaixo do nome (linha do nome + gap), 
+    # lembrando que Paragraph.drawOn usa a base inferior do box
+    y_cargo = y_nome - altura_linha_nome - gap - h
+
+    # x para centralizar o parágrafo no mesmo centro do nome
+    x_cargo = x_centro - (frame_w / 2.0)
+
+    p.drawOn(c, x_cargo, y_cargo)
     
     c.showPage()
     c.save()
