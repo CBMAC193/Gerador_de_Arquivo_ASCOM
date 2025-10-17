@@ -524,7 +524,7 @@
 
             // Verificar se é um tipo que tem modo individual/coletivo
             const tiposComModoConvite = ['Convite'];
-
+            
             if (tiposComModoConvite.includes(tipo)) {
                 // Adicionar seleção de modo para convites
                 html += `
@@ -552,7 +552,7 @@
 
             campos.forEach(campo => {
                 const tamanho = campo.tamanho || 'col-md-6';
-
+                
                 // Verificar se o campo é específico para modo individual ou coletivo
                 let classeVisibilidade = '';
                 if (campo.individual) {
@@ -722,7 +722,7 @@
             } else if (tipo === 'Convite') {
                 // Verificar qual modo está selecionado
                 const modoConvite = document.querySelector('input[name="modo_convite"]:checked')?.value || 'individual';
-
+                
                 if (modoConvite === 'individual') {
                     addVisualIndicator('genero_convidado_convite');
                     addVisualIndicator('cargo_convidado_convite');
@@ -731,7 +731,7 @@
                     addVisualIndicator('tropa_convite');
                     addVisualIndicator('traje_convite');
                 }
-
+                
                 // Campos comuns
                 addVisualIndicator('pra_que_convidado_convite');
                 addVisualIndicator('data_convite');
@@ -895,27 +895,53 @@
             }
         }
 
-        // Alterna campos/required conforme Individual x Coletivo (Convite)
         function configurarModoConvite() {
-            const radioInd = document.getElementById('individual_convite');
-            const radioCol = document.getElementById('coletivo_convite');
-            const toggle = () => {
-                const coletivo = radioCol && radioCol.checked;
-                // Mostrar/Ocultar blocos específicos
-                document.querySelectorAll('.campo-individual').forEach(el => {
-                    el.classList.toggle('d-none', coletivo);
-                    el.querySelectorAll('input,select,textarea').forEach(f => f.required = !coletivo);
-                });
-                document.querySelectorAll('.campo-coletivo').forEach(el => {
-                    el.classList.toggle('d-none', !coletivo);
-                    el.querySelectorAll('input,select,textarea').forEach(f => f.required = coletivo);
-                });
-            };
-            if (radioInd) radioInd.addEventListener('change', toggle);
-            if (radioCol) radioCol.addEventListener('change', toggle);
-            toggle(); // rodar uma vez ao carregar
-        }
+            const radioIndividual = document.getElementById('individual_convite');
+            const radioColetivo = document.getElementById('coletivo_convite');
 
+            if (radioIndividual && radioColetivo) {
+                function alternarModoConvite() {
+                    const isColetivo = radioColetivo.checked;
+                    
+                    // Campos individuais
+                    const camposIndividuais = document.querySelectorAll('.campo-individual');
+                    // Campos coletivos
+                    const camposColetivos = document.querySelectorAll('.campo-coletivo');
+                    
+                    if (isColetivo) {
+                        // Modo coletivo: ocultar campos individuais, mostrar coletivos
+                        camposIndividuais.forEach(campo => {
+                            campo.classList.add('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = false;
+                        });
+                        
+                        camposColetivos.forEach(campo => {
+                            campo.classList.remove('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = true;
+                        });
+                    } else {
+                        // Modo individual: mostrar campos individuais, ocultar coletivos
+                        camposIndividuais.forEach(campo => {
+                            campo.classList.remove('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = true;
+                        });
+                        
+                        camposColetivos.forEach(campo => {
+                            campo.classList.add('d-none');
+                            const input = campo.querySelector('input, select');
+                            if (input) input.required = false;
+                        });
+                    }
+                }
+
+                radioIndividual.addEventListener('change', alternarModoConvite);
+                radioColetivo.addEventListener('change', alternarModoConvite);
+                alternarModoConvite(); // Configurar estado inicial
+            }
+        }
 
         function processarFormulario(e) {
             e.preventDefault();

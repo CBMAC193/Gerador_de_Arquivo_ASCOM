@@ -535,43 +535,19 @@ def gerar_documento_visualizacao():
                 'comandante_agradecimento': request.form.get('comandante_agradecimento')
             }
         elif tipo_documento == 'Convite':
-            modo_convite = request.form.get('modo_convite', 'individual')
-
-            if modo_convite == 'coletivo':
-                nomes_texto = ''  # não exigimos nomes aqui
-                dados_base = {
-                    'modo_convite': 'coletivo',
-                    'tropa_convite': request.form.get('tropa_convite', ''),
-                    'traje_convite': request.form.get('traje_convite', ''),
-                    'pra_que_convidado': request.form.get('pra_que_convidado_convite', ''),
-                    'data': request.form.get('data_convite', ''),
-                    'horario': request.form.get('horario_convite', ''),
-                    'local': request.form.get('local_convite', ''),
-                    'cidade': request.form.get('cidade_convite', ''),
-                    'endereco': request.form.get('endereco_convite', ''),
-                    'posto': request.form.get('posto_convite', ''),
-                    'comandante': request.form.get('comandante_convite', '')
-                }
-                from app.models.convite import gerar_certificado_convite
-                caminho = gerar_certificado_convite(dados_base)
-                return send_file(caminho, as_attachment=False)
-
-            else:
-                nomes_texto = request.form.get('nome_convidado_convite', '')
-                dados_base = {
-                    'modo_convite': 'individual',
-                    'cargo_convidado': request.form.get('cargo_convidado_convite'),
-                    'pra_que_convidado': request.form.get('pra_que_convidado_convite'),
-                    'data': request.form.get('data_convite'),
-                    'horario': request.form.get('horario_convite'),
-                    'local': request.form.get('local_convite'),
-                    'cidade': request.form.get('cidade_convite'),
-                    'endereco': request.form.get('endereco_convite'),
-                    'posto': request.form.get('posto_convite'),
-                    'comandante': request.form.get('comandante_convite'),
-                    'genero_convidado': request.form.get('genero_convidado_convite')
-                }
-
+            nomes_texto = request.form.get('nome_convidado_convite', '')
+            dados_base = {
+                'cargo_convidado': request.form.get('cargo_convidado_convite'),
+                'pra_que_convidado': request.form.get('pra_que_convidado_convite'),
+                'data': request.form.get('data_convite'),
+                'horario': request.form.get('horario_convite'),
+                'local': request.form.get('local_convite'),
+                'cidade': request.form.get('cidade_convite'),
+                'endereco': request.form.get('endereco_convite'),
+                'posto': request.form.get('posto_convite'),
+                'comandante': request.form.get('comandante_convite'),
+                'genero_convidado': (request.form.get('genero_convidado_convite'))
+            }
         elif tipo_documento == 'Nota de Pesar':
             nomes_texto = request.form.get('falecido_nota_pesar', '')
             dados_base = {

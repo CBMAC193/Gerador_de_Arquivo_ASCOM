@@ -303,43 +303,23 @@ def gerar_certificado_convite(dados: dict) -> str:
         traje = (dados.get("traje_convite") or "").strip()
         
         # Validar campos obrigatórios para modo coletivo
-        modo_convite = dados.get("modo_convite", "individual")
-
-        if modo_convite == "individual":
-            campos_obrigatorios = {
-                'Posto do Comandante': posto,
-                'Nome do Comandante': comandante,
-                'Cargo do Convidado': cargo_convidado,
-                'Nome do Convidado': nome_convidado,
-                'Finalidade do Convite': pra_que,
-                'Endereço': endereco,
-                'Local': local,
-                'Cidade': cidade,
-                'Data': data_evento,
-                'Horário': horario_evento
-            }
-
-        elif modo_convite == "coletivo":
-            tropa = (dados.get("tropa_convite") or "").strip()
-            traje = (dados.get("traje_convite") or "").strip()
-
-            campos_obrigatorios = {
-                'Posto do Comandante': posto,
-                'Nome do Comandante': comandante,
-                'Tropa': tropa,
-                'Finalidade do Convite': pra_que,
-                'Endereço': endereco,
-                'Local': local,
-                'Cidade': cidade,
-                'Data': data_evento,
-                'Horário': horario_evento,
-                'Traje': traje
-            }
-
+        campos_obrigatorios = {
+            'Posto do Comandante': posto,
+            'Nome do Comandante': comandante,
+            'Tropa': tropa,
+            'Finalidade do Convite': pra_que,
+            'Endereço': endereco,
+            'Local': local,
+            'Cidade': cidade,
+            'Data': data_evento,
+            'Horário': horario_evento,
+            'Traje': traje
+        }
+        
         campos_vazios = [nome for nome, valor in campos_obrigatorios.items() if not valor]
         if campos_vazios:
             raise ValueError(f"Campos obrigatórios não preenchidos: {', '.join(campos_vazios)}")
-
+        
         # Construir texto principal para modo coletivo
         posto_formatado = f"{posto} " if posto else ""
         

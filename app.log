@@ -1604,3 +1604,17 @@ paragraph text '<para>Agradecemos \xe0 Sazilhamas - Func Cival, CBMAC, pela Pelo
 2025-10-16 14:01:36,917 - INFO - Gerados 1 documentos
 2025-10-16 14:02:01,979 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
 2025-10-16 14:02:02,277 - INFO - Gerados 1 documentos
+2025-10-17 11:38:22,010 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
+2025-10-17 11:38:22,553 - ERROR - Erro ao gerar documento para Convite coletivo: cannot access local variable 'campos_obrigatorios' where it is not associated with a value
+2025-10-17 11:38:31,664 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
+2025-10-17 11:38:32,158 - ERROR - Erro ao gerar documento para Convite coletivo: cannot access local variable 'campos_obrigatorios' where it is not associated with a value
+2025-10-17 11:38:53,256 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
+2025-10-17 11:38:53,756 - ERROR - Erro ao gerar documento para Convite coletivo: cannot access local variable 'campos_obrigatorios' where it is not associated with a value
+2025-10-17 11:55:00,669 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
+2025-10-17 11:55:01,223 - ERROR - Erro ao gerar documento para ]]: cannot access local variable 'campos_obrigatorios' where it is not associated with a value
+2025-10-17 11:56:09,237 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
+2025-10-17 11:56:09,735 - ERROR - Erro ao gerar documento para das: cannot access local variable 'campos_obrigatorios' where it is not associated with a value
+2025-10-17 11:59:46,582 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
+2025-10-17 11:59:47,181 - INFO - Gerados 1 documentos
+2025-10-17 11:59:54,294 - INFO - === GERANDO DOCUMENTO PARA VISUALIZA플O ===
+2025-10-17 11:59:54,908 - INFO - Gerados 1 documentos
